@@ -13,7 +13,8 @@
         android:layout_height="200dp"
         android:layout_marginTop="30dp"
         android:src="@drawable/logo_login"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/tv_title"
