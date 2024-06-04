@@ -13,21 +13,19 @@
         android:layout_height="200dp"
         android:layout_marginTop="30dp"
         android:src="@drawable/logo_login"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
-        android:text="Refactoring Life Academy"
+        android:text="@string/refactoring_life_academy"
         android:textAlignment="center"
         android:textColor="@color/light_purple"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/iv_icon_login"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toBottomOf="@id/iv_icon_login" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/line1"
@@ -47,8 +45,7 @@
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@id/btn_register"
-        app:layout_constraintTop_toBottomOf="@id/line1"
-        tools:ignore="VisualLintButtonSize" />
+        app:layout_constraintTop_toBottomOf="@id/line1" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_register"
@@ -60,8 +57,7 @@
         android:text="@string/register"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/btn_login"
-        tools:ignore="VisualLintButtonSize" />
+        app:layout_constraintTop_toBottomOf="@id/btn_login" />
 
     <TextView
         android:id="@+id/tv_alert_support"
