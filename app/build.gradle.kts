@@ -33,6 +33,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -59,5 +62,8 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:4.7.2")
     //recyclerview
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+    //navegation
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.5.3")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.5.3")
 
 }
