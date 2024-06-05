@@ -6,5 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivityRegister">
+    
+    <TextView
+        android:id="@+id/tv_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/registrarse"
+        android:textStyle="bold"
+        android:textSize="35sp"
+        android:textColor="@color/black"
+
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
