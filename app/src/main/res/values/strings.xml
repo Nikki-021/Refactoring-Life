@@ -4,5 +4,12 @@
     <string name="register">Registrar</string>
     <string name="alert_contact_support">En caso de tener problemas comunicarse con soporte</string>
     <string name="refactoring_life_academy">Refactoring Life Academy</string>
-    <string name="registrarse">Registrarse</string>
+    <string name="register">Registrarse</string>
+    <string name="email_register">Email</string>
+    <string name="password_confirm">Confirmar Contraseña</string>
+    <string name="password">Contraseña</string>
+    <string name="enter">Entrar</string>
+    <string name="showPasword">Mostrar Contraseña</string>
+    <string name="acountMessage">Si ya tienes una cuenta,</string>
+    <string name="loginMessage">inicie sesión aquí</string>
 </resources>
