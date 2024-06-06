@@ -5,17 +5,13 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.appteam4.databinding.LoginBinding
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var binding: LoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = LoginBinding.inflate(layoutInflater)
         enableEdgeToEdge()
-        setContentView(binding.root)
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -25,4 +21,3 @@ class LoginActivity : AppCompatActivity() {
 
     }
 }
-
