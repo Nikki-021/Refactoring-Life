@@ -8,11 +8,11 @@
     tools:context=".MainActivityRegister">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHorizontal"
+        android:id="@+id/guideline_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="150dp" />
+        app:layout_constraintGuide_percent="0.2" />
 
     <TextView
         android:id="@+id/tv_register"
@@ -22,50 +22,50 @@
         android:textColor="@color/black"
         android:textSize="35sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/et_emailRegister"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal" />
+        app:layout_constraintStart_toStartOf="@+id/et_email_register"
+        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHorizontal2"
+        android:id="@+id/guideline_horizontal2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="270dp" />
+        app:layout_constraintGuide_percent="0.38" />
 
     <EditText
-        android:id="@+id/et_emailRegister"
+        android:id="@+id/et_email_register"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginHorizontal="45dp"
+        android:layout_marginHorizontal="30dp"
         android:autofillHints=""
         android:background="@drawable/square_buttom"
-        android:drawableStart="@drawable/cuenta"
+        android:drawableStart="@drawable/account"
         android:hint="@string/email_register"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal2" />
+        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal2" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHorizontal3"
+        android:id="@+id/guideline_horizontal3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="360dp" />
+        app:layout_constraintGuide_percent="0.49"  />
 
     <EditText
-        android:id="@+id/et_passwordRegister"
+        android:id="@+id/et_password_register"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginHorizontal="45dp"
+        android:layout_marginHorizontal="30dp"
         android:autofillHints=""
         android:background="@drawable/square_buttom"
-        android:drawableStart="@drawable/candado"
         android:hint="@string/password"
         android:inputType="textPassword"
+        android:drawableStart="@drawable/padlock"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal3" />
+        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal3" />
 
     <View
         android:id="@+id/vw_square"
@@ -73,11 +73,11 @@
         android:layout_height="15dp"
         android:layout_marginTop="55dp"
         android:background="@drawable/square_buttom"
-        app:layout_constraintStart_toStartOf="@+id/et_passwordRegister"
-        app:layout_constraintTop_toTopOf="@+id/et_passwordRegister" />
+        app:layout_constraintStart_toStartOf="@+id/et_password_register"
+        app:layout_constraintTop_toTopOf="@+id/et_password_register" />
 
     <TextView
-        android:id="@+id/tv_showPassword"
+        android:id="@+id/tv_show_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
@@ -85,28 +85,28 @@
         android:text="@string/showPasword"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/vw_square"
-        app:layout_constraintTop_toTopOf="@+id/et_passwordRegister" />
+        app:layout_constraintTop_toTopOf="@+id/et_password_register" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHorizontal4"
+        android:id="@+id/guideline_horizontal4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="450dp" />
+        app:layout_constraintGuide_percent="0.61"  />
 
     <EditText
-        android:id="@+id/et_confirmpasswordRegister"
+        android:id="@+id/et_confirmpassword_register"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginHorizontal="45dp"
+        android:layout_marginHorizontal="30dp"
         android:autofillHints=""
         android:background="@drawable/square_buttom"
-        android:drawableStart="@drawable/candado"
+        android:drawableStart="@drawable/padlock"
         android:hint="@string/password_confirm"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal4" />
+        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal4" />
 
     <View
         android:id="@+id/vw_square2"
@@ -114,11 +114,11 @@
         android:layout_height="15dp"
         android:layout_marginTop="55dp"
         android:background="@drawable/square_buttom"
-        app:layout_constraintStart_toStartOf="@+id/et_confirmpasswordRegister"
-        app:layout_constraintTop_toTopOf="@+id/et_confirmpasswordRegister" />
+        app:layout_constraintStart_toStartOf="@+id/et_confirmpassword_register"
+        app:layout_constraintTop_toTopOf="@+id/et_confirmpassword_register" />
 
     <TextView
-        android:id="@+id/tv_showPassword2"
+        android:id="@+id/tv_show_password2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
@@ -126,26 +126,25 @@
         android:text="@string/showPasword"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/vw_square2"
-        app:layout_constraintTop_toTopOf="@+id/et_confirmpasswordRegister" />
-
+        app:layout_constraintTop_toTopOf="@+id/et_confirmpassword_register" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHorizontal5"
+        android:id="@+id/guideline_horizontal5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="170dp" />
+        app:layout_constraintGuide_percent="0.76"  />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bt_enter"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_margin="45dp"
+        android:layout_margin="30dp"
         android:background="@drawable/rounded_button"
         android:text="@string/enter"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal5" />
+        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal5" />
 
     <TextView
         android:id="@+id/tv_message"
@@ -153,9 +152,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/acountMessage"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -164,12 +163,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="170dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/loginMessage"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_message" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
