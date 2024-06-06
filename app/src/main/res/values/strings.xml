@@ -8,6 +8,6 @@
     <string name="email">Email</string>
     <string name="password">Contraseña</string>
     <string name="get_in">Entrar</string>
-    <string name="register2">Si no tienes una cuenta  ,</string>
+    <string name="account">Si no tienes una cuenta  ,</string>
     <string name="resister_here">registrate aqui</string>
 </resources>
