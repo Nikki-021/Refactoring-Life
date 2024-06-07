@@ -42,6 +42,7 @@
         android:background="@drawable/rectangle"
         android:drawableStart="@drawable/account"
         android:drawablePadding="12dp"
+        android:padding="10dp"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,6 +63,7 @@
         android:background="@drawable/rectangle"
         android:drawableStart="@drawable/padlock"
         android:drawablePadding="12dp"
+        android:padding="10dp"
         android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +95,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.50" />
+        app:layout_constraintGuide_percent="0.50"/>
 
     <TextView
         android:id="@+id/tv_register"
@@ -101,7 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginBottom="20dp"
-        android:text="@string/account"
+        android:text="@string/register2"
         android:textColor="@color/dark_blue"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
