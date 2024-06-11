@@ -18,7 +18,7 @@
         android:id="@+id/tv_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/register"
+        android:text="@string/sign_up"
         android:textColor="@color/black"
         android:textSize="34sp"
         android:textStyle="bold"
