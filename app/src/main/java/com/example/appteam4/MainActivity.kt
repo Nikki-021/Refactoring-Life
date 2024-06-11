@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigation() {
-        binding.btnLogin.setOnClickListener() {
+        binding.btnLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
