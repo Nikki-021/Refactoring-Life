@@ -29,8 +29,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun callLogin() {
         val email = binding.etEmail.toString()
-        var password = binding.etPassword.toString()
-        
+        val password = binding.etPassword.toString()
+
         viewModel.postLogin(email = email, password = password)
     }
 
