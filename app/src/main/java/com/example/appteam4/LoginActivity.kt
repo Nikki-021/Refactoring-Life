@@ -6,11 +6,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.appteam4.databinding.ActivityLoginBinding
 import com.example.appteam4.ui.viewmodel.ViewModelLogin
 
 class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModels<ViewModelLogin>()
+    private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
@@ -25,7 +28,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun callLogin() {
-        viewModel.postLogin(email = "email@gmail.com", password = "123abc")
+        val email = binding.etEmail.toString()
+        var password = binding.etPassword.toString()
+        
+        viewModel.postLogin(email = email, password = password)
     }
 
     private fun observerLogin() {
