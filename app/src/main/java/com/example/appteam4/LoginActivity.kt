@@ -24,12 +24,13 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
         sentInfo()
-        observerLogin()
+        //observerLogin()
     }
 
     private fun sentInfo() {
         binding.btnGetIn1.setOnClickListener {
             callLogin()
+            observerLogin()
         }
     }
 
@@ -45,6 +46,10 @@ class LoginActivity : AppCompatActivity() {
     private fun observerLogin() {
         viewModel.data.observe(this) {
             it.token
+            val text =
+                "Hello token! ${it.token}"
+            val toast = Toast.makeText(this, text, Toast.LENGTH_SHORT) // in Activity
+            toast.show()
         }
     }
 }
