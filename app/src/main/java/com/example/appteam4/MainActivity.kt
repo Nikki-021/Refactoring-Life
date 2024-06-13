@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.appteam4.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,11 +29,10 @@ class MainActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+        }
+        binding.btnRegister.setOnClickListener {
+            startActivity(Intent(this, MainActivityRegister::class.java))
 
-            binding.btnRegister.setOnClickListener {
-                startActivity(Intent(this, MainActivityRegister::class.java))
-
-            }
         }
     }
 }

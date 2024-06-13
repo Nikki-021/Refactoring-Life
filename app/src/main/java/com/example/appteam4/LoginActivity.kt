@@ -1,6 +1,7 @@
 package com.example.appteam4
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -16,31 +17,34 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_login)
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        callLogin()
+        sentInfo()
         observerLogin()
-        navigation()
+    }
+
+    private fun sentInfo() {
+        binding.btnGetIn1.setOnClickListener {
+            callLogin()
+        }
     }
 
     private fun callLogin() {
-        val email = binding.etEmail.toString()
-        val password = binding.etPassword.toString()
+        viewModel.postLogin(binding.etEmail.text.toString(), binding.etPassword.text.toString())
 
-        viewModel.postLogin(email = email, password = password)
+        val text =
+            "Hello toast! ${binding.etEmail.text.toString()}, ${binding.etPassword.text.toString()}"
+        val toast = Toast.makeText(this, text, Toast.LENGTH_SHORT) // in Activity
+        toast.show()
     }
 
     private fun observerLogin() {
         viewModel.data.observe(this) {
-            val token = it.token
+            it.token
         }
-    }
-
-    private fun navigation() {
-
     }
 }

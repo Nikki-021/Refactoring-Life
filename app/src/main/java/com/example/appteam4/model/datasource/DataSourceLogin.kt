@@ -1,6 +1,7 @@
 package com.example.appteam4.model.datasource
 
 import com.example.appteam4.model.response.ResponseLogin
+import com.example.appteam4.model.service.LoginRequest
 import com.example.appteam4.model.service.ServiceLogin
 import okhttp3.OkHttpClient
 import retrofit2.Response
@@ -16,6 +17,6 @@ class DataSourceLogin {
     )
 
     suspend fun postLogin(email: String, password: String): Response<ResponseLogin> {
-        return serviceData.postLogin(email = email, password = password)
+        return serviceData.postLogin(LoginRequest(email, password))
     }
 }
