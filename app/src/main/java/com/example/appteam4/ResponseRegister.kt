@@ -1,4 +1,6 @@
 package com.example.appteam4
 
-class ResponseRegister {
-}
+import com.google.gson.annotations.SerializedName
+data class ResponseRegister(
+    @SerializedName("accessToken") val token: String,
+)
