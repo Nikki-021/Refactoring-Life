@@ -24,7 +24,6 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
         sentInfo()
-        //observerLogin()
     }
 
     private fun sentInfo() {
@@ -36,20 +35,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun callLogin() {
         viewModel.postLogin(binding.etEmail.text.toString(), binding.etPassword.text.toString())
-
-        val text =
-            "Hello toast! ${binding.etEmail.text.toString()}, ${binding.etPassword.text.toString()}"
-        val toast = Toast.makeText(this, text, Toast.LENGTH_SHORT) // in Activity
-        toast.show()
     }
 
     private fun observerLogin() {
         viewModel.data.observe(this) {
             it.token
-            val text =
-                "Hello token! ${it.token}"
-            val toast = Toast.makeText(this, text, Toast.LENGTH_SHORT) // in Activity
-            toast.show()
         }
     }
 }
