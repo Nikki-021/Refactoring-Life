@@ -14,6 +14,6 @@ class DataSourceRegister {
     )
 
     suspend fun postRegister(email: String, password: String): Response<ResponseRegister>{
-        return serviceData.postRegister(email = email, password = password)
+        return serviceData.postRegister(email, password)
     }
 }

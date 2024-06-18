@@ -8,3 +8,5 @@ interface ServiceRegister {
     @POST("/api/v1/auth/register")
     suspend fun postRegister(@Body email: String, password: String): Response<ResponseRegister>
 }
+
+data class RegisterRequest(val email: String, val password: String)

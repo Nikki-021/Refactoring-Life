@@ -21,25 +21,26 @@ class MainActivityRegister : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        callRegister()
-        observerRegister()
-        navigation()
+        sentInfo()
+    }
+
+    private fun sentInfo() {
+        binding.btEnter.setOnClickListener {
+            callRegister()
+            observerRegister()
+        }
     }
 
     private fun callRegister() {
-        val email = binding.etEmailRegister.toString()
-        val password = binding.etPasswordRegister.toString()
-
-        viewModel.postRegister(email = email, password = password)
+        viewModel.postRegister(
+            binding.etEmailRegister.text.toString(),
+            binding.etPasswordRegister.text.toString()
+        )
     }
 
     private fun observerRegister() {
         viewModel.data.observe(this) {
             it.token
         }
-    }
-
-    private fun navigation() {
-
     }
 }
