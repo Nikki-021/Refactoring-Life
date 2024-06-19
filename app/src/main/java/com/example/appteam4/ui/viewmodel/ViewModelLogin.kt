@@ -1,5 +1,6 @@
 package com.example.appteam4.ui.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,24 +12,28 @@ import kotlinx.coroutines.launch
 
 class ViewModelLogin(private val repositoryLogin: RepositoryLogin = RepositoryLogin()) :
     ViewModel() {
-    val data = MutableLiveData<ResponseLogin>()
-    val loading = MutableLiveData<Boolean>()
-    val error = MutableLiveData<String>()
+
+    private val _loginState = MutableLiveData<ResultState<String>>()
+    val loginState: LiveData<ResultState<String>> get() = _loginState
 
     fun postLogin(email: String, password: String) {
-        loading.value = true
         viewModelScope.launch {
+            _loginState.value = ResultState.Loading
+
             try {
                 val result = repositoryLogin.postLogin(email, password)
-                loading.postValue(false)
                 if (result.isSuccessful) {
-                    data.postValue(result.body())
+                    val responseBody = result.body()
+                    if (responseBody != null) {
+                        _loginState.postValue(ResultState.Success(responseBody.token))
+                    } else {
+                        _loginState.postValue(ResultState.Error("Cuerpo de la respuesta nulo"))
+                    }
                 } else {
-                    error.postValue(result.message())
+                    _loginState.postValue(ResultState.Error(result.message()))
                 }
             } catch (e: Exception) {
-                loading.postValue(false)
-                error.postValue(e.message ?: "Error desconocido")
+                _loginState.postValue(ResultState.Error(e.message ?: "Error desconocido"))
             }
         }
     }

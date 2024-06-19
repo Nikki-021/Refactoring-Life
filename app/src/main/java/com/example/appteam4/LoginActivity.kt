@@ -1,13 +1,16 @@
 package com.example.appteam4
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Observer
 import com.example.appteam4.databinding.ActivityLoginBinding
+import com.example.appteam4.ui.viewmodel.ResultState
 import com.example.appteam4.ui.viewmodel.ViewModelLogin
 
 class LoginActivity : AppCompatActivity() {
@@ -38,8 +41,24 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun observerLogin() {
-        viewModel.data.observe(this) {
-            it.token
-        }
+        viewModel.loginState.observe(this, Observer { state ->
+            when (state) {
+                is ResultState.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is ResultState.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(this, state.token, Toast.LENGTH_SHORT).show()
+                }
+                is ResultState.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                }
+
+                is ResultState.Error -> state.message
+                ResultState.Loading -> binding.progressBar.visibility
+                is ResultState.Success -> state.token
+            }
+        })
     }
 }
