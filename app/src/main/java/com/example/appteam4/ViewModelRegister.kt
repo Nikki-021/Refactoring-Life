@@ -8,6 +8,8 @@ import kotlinx.coroutines.launch
 
 class ViewModelRegister(private val repositoryRegister: RepositoryRegister = RepositoryRegister()):ViewModel() {
     val data = MutableLiveData<ResponseRegister>()
+    val loading = MutableLiveData<Boolean>()
+    val error = MutableLiveData<String>()
 
     fun postRegister(email: String, password: String){
         CoroutineScope(Dispatchers.IO).launch {
