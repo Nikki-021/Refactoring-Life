@@ -38,4 +38,3 @@ class ViewModelLogin(private val repositoryLogin: RepositoryLogin = RepositoryLo
         }
     }
 }
-
