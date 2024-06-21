@@ -1,6 +1,7 @@
 package com.example.appteam4
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -44,20 +45,21 @@ class LoginActivity : AppCompatActivity() {
         viewModel.loginState.observe(this, Observer { state ->
             when (state) {
                 is ResultState.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
-                }
-                is ResultState.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(this, state.token, Toast.LENGTH_SHORT).show()
-                }
-                is ResultState.Error -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                    binding.viewProgressBar.progressBar.visibility = View.VISIBLE
+                    binding.viewProgressBar.view.visibility = View.VISIBLE
                 }
 
-                is ResultState.Error -> state.message
-                ResultState.Loading -> binding.progressBar.visibility
-                is ResultState.Success -> state.token
+                is ResultState.Success -> {
+                    binding.viewProgressBar.view.visibility = View.GONE
+                    binding.viewProgressBar.progressBar.visibility = View.GONE
+                    Toast.makeText(this, state.token, Toast.LENGTH_SHORT).show()
+                }
+
+                is ResultState.Error -> {
+                    binding.viewProgressBar.view.visibility = View.GONE
+                    binding.viewProgressBar.progressBar.visibility = View.GONE
+                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                }
             }
         })
     }

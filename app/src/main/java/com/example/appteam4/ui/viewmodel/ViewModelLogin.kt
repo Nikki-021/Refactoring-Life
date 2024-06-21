@@ -1,5 +1,6 @@
 package com.example.appteam4.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,7 +20,6 @@ class ViewModelLogin(private val repositoryLogin: RepositoryLogin = RepositoryLo
     fun postLogin(email: String, password: String) {
         viewModelScope.launch {
             _loginState.value = ResultState.Loading
-
             try {
                 val result = repositoryLogin.postLogin(email, password)
                 if (result.isSuccessful) {
@@ -30,7 +30,7 @@ class ViewModelLogin(private val repositoryLogin: RepositoryLogin = RepositoryLo
                         _loginState.postValue(ResultState.Error("Cuerpo de la respuesta nulo"))
                     }
                 } else {
-                    _loginState.postValue(ResultState.Error(result.message()))
+                    _loginState.postValue(ResultState.Error("Error en la respuesta"))
                 }
             } catch (e: Exception) {
                 _loginState.postValue(ResultState.Error(e.message ?: "Error desconocido"))
