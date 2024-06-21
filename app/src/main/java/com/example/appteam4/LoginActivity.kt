@@ -1,7 +1,6 @@
 package com.example.appteam4
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -52,7 +51,6 @@ class LoginActivity : AppCompatActivity() {
                 is ResultState.Success -> {
                     binding.viewProgressBar.view.visibility = View.GONE
                     binding.viewProgressBar.progressBar.visibility = View.GONE
-                    Toast.makeText(this, state.token, Toast.LENGTH_SHORT).show()
                 }
 
                 is ResultState.Error -> {
