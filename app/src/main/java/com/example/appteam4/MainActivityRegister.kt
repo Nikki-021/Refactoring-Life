@@ -21,14 +21,8 @@ class MainActivityRegister : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        sentInfo()
-    }
-
-    private fun sentInfo() {
-        binding.btEnter.setOnClickListener {
-            callRegister()
-            observerRegister()
-        }
+        callRegister()
+        observerRegister()
     }
 
     private fun callRegister() {
