@@ -96,9 +96,19 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateLoginButtonColor(isEnabled: Boolean) {
         if (isEnabled) {
-            binding.btnGetIn1.setBackgroundColor(ContextCompat.getColor(this, R.color.enabled_button_color))
+            binding.btnGetIn1.setBackgroundColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.enabled_button_color
+                )
+            )
         } else {
-            binding.btnGetIn1.setBackgroundColor(ContextCompat.getColor(this, R.color.disabled_button_color))
+            binding.btnGetIn1.setBackgroundColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.disabled_button_color
+                )
+            )
         }
     }
 }
