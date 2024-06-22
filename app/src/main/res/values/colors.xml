@@ -6,4 +6,6 @@
     <color name="light_blue">#5DADE2</color>
     <color name="dark_blue">#34495E</color>
     <color name="grey">#8D9FA3A6</color>
+    <color name="enabled_button_color">#5DADE2</color>
+    <color name="disabled_button_color">#717477</color>
 </resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+    <color android:name="enabled_button_color">light_blue</color> //Habilitado
+    <color android:name="disabled_button_color">grey</color> //Deshabilitado
+        </shape>
+    </item>
+</selector>

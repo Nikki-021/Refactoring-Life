@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
@@ -76,6 +77,7 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel.isLoginButtonEnabled.observe(this) { isEnabled ->
             binding.btnGetIn1.isEnabled = isEnabled
+            updateLoginButtonColor(isEnabled)
         }
 
         loginViewModel.loginResult.observe(this) { success ->
@@ -89,6 +91,14 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnGetIn1.setOnClickListener {
             loginViewModel.login()
+        }
+    }
+
+    private fun updateLoginButtonColor(isEnabled: Boolean) {
+        if (isEnabled) {
+            binding.btnGetIn1.setBackgroundColor(ContextCompat.getColor(this, R.color.enabled_button_color))
+        } else {
+            binding.btnGetIn1.setBackgroundColor(ContextCompat.getColor(this, R.color.disabled_button_color))
         }
     }
 }
