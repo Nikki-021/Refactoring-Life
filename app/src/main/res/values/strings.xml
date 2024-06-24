@@ -17,4 +17,5 @@
     <string name="showPasword">Mostrar Contraseña</string>
     <string name="acountMessage">Si ya tienes una cuenta,</string>
     <string name="loginMessage">inicie sesión aquí</string>
+    <string name="hit_search_product">Busca en Refactoring Life Shop</string>
 </resources>
