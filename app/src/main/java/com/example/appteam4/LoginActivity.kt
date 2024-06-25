@@ -67,14 +67,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() {
-        loginViewModel.emailError.observe(this) { error ->
-            binding.etEmail.error = error
-        }
-
-        loginViewModel.passwordError.observe(this) { error ->
-            binding.etPassword.error = error
-        }
-
         loginViewModel.isLoginButtonEnabled.observe(this) { isEnabled ->
             binding.btnGetIn1.isEnabled = isEnabled
             updateLoginButtonColor(isEnabled)
@@ -82,15 +74,17 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel.loginResult.observe(this) { success ->
             if (success) {
-                // Navegar a la siguiente pantalla
-                Toast.makeText(this, "Inicio de sesión exitosa", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "Error al iniciar sesión", Toast.LENGTH_SHORT).show()
             }
         }
 
         binding.btnGetIn1.setOnClickListener {
-            loginViewModel.login()
+            loginViewModel.login(
+                binding.etEmail.text.toString().trim(),
+                binding.etPassword.text.toString().trim()
+            )
         }
     }
 
