@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
+import androidx.lifecycle.Observer
 import com.example.appteam4.databinding.ActivityLoginBinding
 import com.example.appteam4.ui.viewmodel.LoginViewModel
 import com.example.appteam4.ui.viewmodel.ResultState
