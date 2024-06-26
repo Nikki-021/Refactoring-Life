@@ -26,11 +26,12 @@ class MainActivityRegister : AppCompatActivity() {
     }
 
     private fun callRegister() {
-        binding.btEnter.setOnClickListener()
-        viewModel.postRegister(
-            binding.etEmailRegister.text.toString(),
-            binding.etPasswordRegister.text.toString()
-        )
+        binding.btEnter.setOnClickListener {
+            viewModel.postRegister(
+                binding.etEmailRegister.text.toString(),
+                binding.etPasswordRegister.text.toString()
+            )
+        }
     }
 
     private fun observerRegister() {
