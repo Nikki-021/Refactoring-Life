@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/grey"
+    android:layout_marginEnd="18dp"
     android:padding="5dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/item_card_img"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:padding="10dp"
         app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,7 +21,7 @@
             android:id="@+id/item_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:padding="10dp"
             android:src="@drawable/example_pngwing_short"
             tools:ignore="ContentDescription" />
 
@@ -33,21 +33,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:text="holaaaaaa aaa"
         android:textColor="@color/black"
-        android:textSize="6sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/item_card_img" />
 
     <TextView
         android:id="@+id/item_price"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:text="$ 10.0000"
+        android:layout_marginEnd="15dp"
+        android:textAlignment="viewStart"
         android:textColor="@color/black"
-        android:textSize="6sp"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
