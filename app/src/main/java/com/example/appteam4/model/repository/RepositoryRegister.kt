@@ -1,5 +1,7 @@
-package com.example.appteam4
+package com.example.appteam4.model.repository
 
+import com.example.appteam4.model.datasource.DataSourceRegister
+import com.example.appteam4.model.response.ResponseRegister
 import retrofit2.Response
 
 class RepositoryRegister(private val dataSourceRegister: DataSourceRegister = DataSourceRegister()) {

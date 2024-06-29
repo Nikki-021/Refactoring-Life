@@ -1,4 +1,4 @@
-package com.example.appteam4
+package com.example.appteam4.model.response
 
 import com.google.gson.annotations.SerializedName
 data class ResponseRegister(

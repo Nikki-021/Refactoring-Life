@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.appteam4.databinding.ActivityMainRegisterBinding
 import androidx.activity.viewModels
+import com.example.appteam4.ui.viewmodel.ViewModelRegister
 
 class MainActivityRegister : AppCompatActivity() {
     private val viewModel by viewModels<ViewModelRegister>()

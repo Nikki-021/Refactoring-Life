@@ -1,5 +1,8 @@
-package com.example.appteam4
+package com.example.appteam4.model.datasource
 
+import com.example.appteam4.model.response.ResponseRegister
+import com.example.appteam4.model.service.RegisterRequest
+import com.example.appteam4.model.service.ServiceRegister
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit

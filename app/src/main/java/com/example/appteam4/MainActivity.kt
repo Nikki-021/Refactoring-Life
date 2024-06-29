@@ -9,6 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.appteam4.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +25,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigation() {
+
+        binding.btnLogin.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
         binding.btnRegister.setOnClickListener {
-            startActivity(Intent(this, ActivityMainBinding::class.java))
+            startActivity(Intent(this, MainActivityRegister::class.java))
+
         }
     }
 }
