@@ -1,12 +1,16 @@
 package com.example.appteam4
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.appteam4.databinding.ActivityMainRegisterBinding
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import com.example.appteam4.ui.viewmodel.ResultState
 import com.example.appteam4.ui.viewmodel.ViewModelRegister
 
 class MainActivityRegister : AppCompatActivity() {
@@ -36,8 +40,24 @@ class MainActivityRegister : AppCompatActivity() {
     }
 
     private fun observerRegister() {
-        viewModel.data.observe(this) {
-            it.token
-        }
+        viewModel.registerState.observe(this, Observer { state ->
+            when (state) {
+                is ResultState.Loading -> {
+                    binding.viewProgressBar.progressBar.visibility = View.VISIBLE
+                    binding.viewProgressBar.view.visibility = View.VISIBLE
+                }
+
+                is ResultState.Success -> {
+                    binding.viewProgressBar.view.visibility = View.GONE
+                    binding.viewProgressBar.progressBar.visibility = View.GONE
+                }
+
+                is ResultState.Error -> {
+                    binding.viewProgressBar.view.visibility = View.GONE
+                    binding.viewProgressBar.progressBar.visibility = View.GONE
+                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 }
