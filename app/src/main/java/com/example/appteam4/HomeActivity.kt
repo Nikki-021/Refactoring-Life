@@ -7,20 +7,19 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appteam4.databinding.ActivityHomeBinding
-import com.example.appteam4.databinding.ItemRecyclerviewCategoryBinding
 import com.example.appteam4.ui.adapter.Products
-import com.example.appteam4.ui.adapter.RecyclerViewCategory
-import com.example.appteam4.ui.adapter.RecyclerViewProducts
+import com.example.appteam4.ui.adapter.AdapterCategory
+import com.example.appteam4.ui.adapter.AdapterProducts
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
 
-    private val recyclerViewCategoryAdapter by lazy {
-        RecyclerViewCategory()
+    private val adapterCategoryAdapter by lazy {
+        AdapterCategory()
     }
 
-    private val recyclerViewProductsAdapter by lazy {
-        RecyclerViewProducts()
+    private val adapterProductsAdapter by lazy {
+        AdapterProducts()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,27 +43,16 @@ class HomeActivity : AppCompatActivity() {
 
     private fun categoryRecyclerView() {
         binding.recyclerViewCategory.apply {
-            adapter = recyclerViewCategoryAdapter
+            adapter = adapterCategoryAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
-        val itemCategorys = listOf("hola", "quetal", "adios", "category1", "category2", "category3")
-        recyclerViewCategoryAdapter.addItems(itemCategorys)
     }
 
     private fun productsRecyclerView() {
         binding.recyclerViewProducts.apply {
-            adapter = recyclerViewProductsAdapter
+            adapter = adapterProductsAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
-        val productsList = listOf(
-            Products("Product 1", "image1.jpg", "$" + "10.00"),
-            Products("Product 2", "image2.jpg", "$" + "20.00"),
-            Products("Product 3", "image3.jpg", "$" + "30.00"),
-            Products("Product 1", "image1.jpg", "$" + "10.00"),
-            Products("Product 2", "image2.jpg", "$" + "20.00"),
-            Products("Product 3", "image3.jpg", "$" + "30.00")
-        )
-        recyclerViewProductsAdapter.addItems(productsList)
     }
 
     private fun infoOffer() {

@@ -3,22 +3,15 @@ package com.example.appteam4.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.appteam4.databinding.ItemRecyclerviewCategoryBinding
 import com.example.appteam4.databinding.ItemRecyclerviewProductsBinding
 
-class RecyclerViewProducts : RecyclerView.Adapter<RecyclerViewProducts.ViewHolder>() {
-
-    private val listProducts = mutableListOf<Products>()
-
-    fun addItems(items: List<Products>) {
-        listProducts.addAll(items)
-    }
+class AdapterProducts : RecyclerView.Adapter<AdapterProducts.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemRecyclerviewProductsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Products) {
-            binding.itemTitle.text = item.name
-            binding.itemPrice.text = item.price
+        fun bind() {
+            binding.itemTitle.text
+            binding.itemPrice.text
         }
     }
 
@@ -31,9 +24,9 @@ class RecyclerViewProducts : RecyclerView.Adapter<RecyclerViewProducts.ViewHolde
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = listProducts.size
+    override fun getItemCount(): Int = 6
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listProducts[position])
+        holder.bind()
     }
 }

@@ -18,4 +18,7 @@
     <string name="acountMessage">Si ya tienes una cuenta,</string>
     <string name="loginMessage">inicie sesión aquí</string>
     <string name="hit_search_product">Busca en Refactoring Life Shop</string>
+    <string name="alert1_support_home">En caso de problemas comunicate con</string>
+    <string name="alert2_support_home">soporte</string>
+    <string name="text_offer_day">Oferta del dia</string>
 </resources>
