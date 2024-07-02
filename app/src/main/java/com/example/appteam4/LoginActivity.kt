@@ -1,5 +1,6 @@
 package com.example.appteam4
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -33,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
         binding.btnGetIn1.setOnClickListener {
             callLogin()
             observerLogin()
+
         }
     }
 
@@ -51,6 +53,7 @@ class LoginActivity : AppCompatActivity() {
                 is ResultState.Success -> {
                     binding.viewProgressBar.view.visibility = View.GONE
                     binding.viewProgressBar.progressBar.visibility = View.GONE
+                    startActivity(Intent(this, HomeActivity::class.java))
                 }
 
                 is ResultState.Error -> {

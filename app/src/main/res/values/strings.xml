@@ -12,4 +12,8 @@
     <string name="showPasword">Mostrar Contraseña</string>
     <string name="accountMessage">Si ya tienes una cuenta,</string>
     <string name="loginMessage">inicie sesión aquí</string>
+    <string name="log_in">Iniciar sesion</string>
+    <string name="email">Email</string>
+    <string name="account">Si no tienes una cuenta ,   </string>
+    <string name="register_here">registrate aqui</string>
 </resources>
