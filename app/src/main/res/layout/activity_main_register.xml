@@ -182,4 +182,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline_horizontal6" />
 
+    <include
+        android:id="@+id/viewProgressBar"
+        layout="@layout/progress_bar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
