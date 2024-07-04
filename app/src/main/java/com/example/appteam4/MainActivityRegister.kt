@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.appteam4.databinding.ActivityMainRegisterBinding
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.example.appteam4.ui.viewmodel.RegisterEvent
 import com.example.appteam4.ui.viewmodel.ResultState
 import com.example.appteam4.ui.viewmodel.ViewModelRegister
 
@@ -40,24 +41,23 @@ class MainActivityRegister : AppCompatActivity() {
     }
 
     private fun observerRegister() {
-        viewModel.registerState.observe(this, Observer { state ->
-            when (state) {
-                is ResultState.Loading -> {
+        viewModel.data.observe(this){
+            when(it){
+                is RegisterEvent.Successs -> {
+                    binding.viewProgressBar.view.visibility = View.GONE
+                    binding.viewProgressBar.progressBar.visibility = View.GONE
+                    Toast.makeText(this, it.value.token, Toast.LENGTH_SHORT).show()
+                }
+                is RegisterEvent.Loading -> {
                     binding.viewProgressBar.progressBar.visibility = View.VISIBLE
                     binding.viewProgressBar.view.visibility = View.VISIBLE
                 }
-
-                is ResultState.Success -> {
+                is RegisterEvent.Error -> {
                     binding.viewProgressBar.view.visibility = View.GONE
                     binding.viewProgressBar.progressBar.visibility = View.GONE
-                }
-
-                is ResultState.Error -> {
-                    binding.viewProgressBar.view.visibility = View.GONE
-                    binding.viewProgressBar.progressBar.visibility = View.GONE
-                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
-        })
+        }
     }
 }
