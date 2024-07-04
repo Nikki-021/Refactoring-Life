@@ -30,15 +30,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun sentInfo() {
-        binding.btnGetIn1.setOnClickListener {
-            callLogin()
-            observerLogin()
-
-        }
+        callLogin()
+        observerLogin()
     }
 
     private fun callLogin() {
-        viewModel.postLogin(binding.etEmail.text.toString(), binding.etPassword.text.toString())
+        binding.btnGetIn1.setOnClickListener {
+            viewModel.postLogin(binding.etEmail.text.toString(), binding.etPassword.text.toString())
+        }
     }
 
     private fun observerLogin() {
