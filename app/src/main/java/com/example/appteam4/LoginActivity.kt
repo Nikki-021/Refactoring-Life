@@ -5,15 +5,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.Observer
 import com.example.appteam4.databinding.ActivityLoginBinding
 import com.example.appteam4.ui.viewmodel.LoginEvent
-import com.example.appteam4.ui.viewmodel.ResultState
 import com.example.appteam4.ui.viewmodel.ViewModelLogin
 
 class LoginActivity : AppCompatActivity() {
