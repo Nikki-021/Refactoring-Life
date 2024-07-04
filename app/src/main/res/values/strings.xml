@@ -12,8 +12,13 @@
     <string name="showPasword">Mostrar Contraseña</string>
     <string name="accountMessage">Si ya tienes una cuenta,</string>
     <string name="loginMessage">inicie sesión aquí</string>
+    <string name="hit_search_product">Busca en Refactoring Life Shop</string>
+    <string name="alert1_support_home">En caso de problemas comunicate con</string>
+    <string name="alert2_support_home">soporte</string>
+    <string name="text_offer_day">Oferta del dia</string>
     <string name="log_in">Iniciar sesion</string>
     <string name="email">Email</string>
     <string name="account">Si no tienes una cuenta ,   </string>
     <string name="register_here">registrate aqui</string>
+>>>>>>> 5a6b00805304362da3fa977d977d539a3f26a4ed
 </resources>
