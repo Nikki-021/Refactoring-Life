@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import com.example.appteam4.databinding.ActivityLoginBinding
+import com.example.appteam4.ui.viewmodel.LoginEvent
 import com.example.appteam4.ui.viewmodel.ResultState
 import com.example.appteam4.ui.viewmodel.ViewModelLogin
 
@@ -43,25 +45,25 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun observerLogin() {
-        viewModel.loginState.observe(this, Observer { state ->
-            when (state) {
-                is ResultState.Loading -> {
-                    binding.viewProgressBar.progressBar.visibility = View.VISIBLE
-                    binding.viewProgressBar.view.visibility = View.VISIBLE
-                }
-
-                is ResultState.Success -> {
+        viewModel.data.observe(this) {
+            when (it) {
+                is LoginEvent.Success -> {
                     binding.viewProgressBar.view.visibility = View.GONE
                     binding.viewProgressBar.progressBar.visibility = View.GONE
                     startActivity(Intent(this, HomeActivity::class.java))
                 }
 
-                is ResultState.Error -> {
+                is LoginEvent.Loading -> {
+                    binding.viewProgressBar.view.visibility = View.VISIBLE
+                    binding.viewProgressBar.progressBar.visibility = View.VISIBLE
+                }
+
+                is LoginEvent.Error -> {
                     binding.viewProgressBar.view.visibility = View.GONE
                     binding.viewProgressBar.progressBar.visibility = View.GONE
-                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
-        })
+        }
     }
 }
