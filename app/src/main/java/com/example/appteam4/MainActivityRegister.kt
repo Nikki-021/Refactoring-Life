@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.appteam4.databinding.ActivityMainRegisterBinding
 import androidx.activity.viewModels
+import com.example.appteam4.ui.viewmodel.ViewModelRegister
 
 class MainActivityRegister : AppCompatActivity() {
     private val viewModel by viewModels<ViewModelRegister>()
@@ -26,11 +27,12 @@ class MainActivityRegister : AppCompatActivity() {
     }
 
     private fun callRegister() {
-        binding.btEnter.setOnClickListener()
-        viewModel.postRegister(
-            binding.etEmailRegister.text.toString(),
-            binding.etPasswordRegister.text.toString()
-        )
+        binding.btEnter.setOnClickListener {
+            viewModel.postRegister(
+                binding.etEmailRegister.text.toString(),
+                binding.etPasswordRegister.text.toString()
+            )
+        }
     }
 
     private fun observerRegister() {
