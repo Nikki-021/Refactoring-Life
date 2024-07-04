@@ -34,7 +34,6 @@ class LoginActivity : AppCompatActivity() {
         binding.btnGetIn1.setOnClickListener {
             callLogin()
             observerLogin()
-
         }
     }
 

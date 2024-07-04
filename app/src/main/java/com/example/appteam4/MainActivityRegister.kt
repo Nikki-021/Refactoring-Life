@@ -9,9 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.appteam4.databinding.ActivityMainRegisterBinding
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import com.example.appteam4.ui.viewmodel.RegisterEvent
-import com.example.appteam4.ui.viewmodel.ResultState
 import com.example.appteam4.ui.viewmodel.ViewModelRegister
 
 class MainActivityRegister : AppCompatActivity() {
@@ -43,7 +41,7 @@ class MainActivityRegister : AppCompatActivity() {
     private fun observerRegister() {
         viewModel.data.observe(this){
             when(it){
-                is RegisterEvent.Successs -> {
+                is RegisterEvent.Success -> {
                     binding.viewProgressBar.view.visibility = View.GONE
                     binding.viewProgressBar.progressBar.visibility = View.GONE
                     Toast.makeText(this, it.value.token, Toast.LENGTH_SHORT).show()

@@ -17,7 +17,7 @@ class ViewModelRegister(private val repositoryRegister: RepositoryRegister = Rep
             data.postValue(RegisterEvent.Loading)
             val result = repositoryRegister.postRegister(email, password)
             if (result.body() != null) {
-                data.postValue(RegisterEvent.Successs(result.body()!!))
+                data.postValue(RegisterEvent.Success(result.body()!!))
             } else {
                 data.postValue(RegisterEvent.Error(messageError))
             }
