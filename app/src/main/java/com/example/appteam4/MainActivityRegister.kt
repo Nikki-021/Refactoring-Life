@@ -1,5 +1,6 @@
 package com.example.appteam4
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -44,7 +45,7 @@ class MainActivityRegister : AppCompatActivity() {
                 is RegisterEvent.Success -> {
                     binding.viewProgressBar.view.visibility = View.GONE
                     binding.viewProgressBar.progressBar.visibility = View.GONE
-                    Toast.makeText(this, it.value.token, Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, LoginActivity::class.java))
                 }
                 is RegisterEvent.Loading -> {
                     binding.viewProgressBar.progressBar.visibility = View.VISIBLE
