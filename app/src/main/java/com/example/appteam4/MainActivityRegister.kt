@@ -11,10 +11,10 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.appteam4.databinding.ActivityMainRegisterBinding
 import androidx.activity.viewModels
 import com.example.appteam4.ui.viewmodel.RegisterEvent
-import com.example.appteam4.ui.viewmodel.ViewModelRegister
+import com.example.appteam4.ui.viewmodel.RegisterViewModel
 
 class MainActivityRegister : AppCompatActivity() {
-    private val viewModel by viewModels<ViewModelRegister>()
+    private val viewModel by viewModels<RegisterViewModel>()
     private lateinit var binding: ActivityMainRegisterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainRegisterBinding.inflate(layoutInflater)

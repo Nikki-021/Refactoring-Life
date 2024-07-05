@@ -7,7 +7,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ViewModelLogin(private val repositoryLogin: RepositoryLogin = RepositoryLogin()) :
+class LoginViewModel(private val repositoryLogin: RepositoryLogin = RepositoryLogin()) :
     ViewModel() {
 
     val data = MutableLiveData<LoginEvent>()

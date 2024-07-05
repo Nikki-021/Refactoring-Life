@@ -7,7 +7,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ViewModelRegister(private val repositoryRegister: RepositoryRegister = RepositoryRegister()) : ViewModel() {
+class RegisterViewModel(private val repositoryRegister: RepositoryRegister = RepositoryRegister()) : ViewModel() {
 
     val data = MutableLiveData<RegisterEvent>()
     private val messageError = "Error en el servicio"

@@ -11,10 +11,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.appteam4.databinding.ActivityLoginBinding
 import com.example.appteam4.ui.viewmodel.LoginEvent
-import com.example.appteam4.ui.viewmodel.ViewModelLogin
+import com.example.appteam4.ui.viewmodel.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
-    private val viewModel by viewModels<ViewModelLogin>()
+    private val viewModel by viewModels<LoginViewModel>()
     private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityLoginBinding.inflate(layoutInflater)
