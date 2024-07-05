@@ -1,16 +1,20 @@
 package com.example.appteam4
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.appteam4.databinding.ActivityMainRegisterBinding
 import androidx.activity.viewModels
-import com.example.appteam4.ui.viewmodel.ViewModelRegister
+import com.example.appteam4.ui.viewmodel.RegisterEvent
+import com.example.appteam4.ui.viewmodel.RegisterViewModel
 
 class MainActivityRegister : AppCompatActivity() {
-    private val viewModel by viewModels<ViewModelRegister>()
+    private val viewModel by viewModels<RegisterViewModel>()
     private lateinit var binding: ActivityMainRegisterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainRegisterBinding.inflate(layoutInflater)
@@ -36,8 +40,23 @@ class MainActivityRegister : AppCompatActivity() {
     }
 
     private fun observerRegister() {
-        viewModel.data.observe(this) {
-            it.token
+        viewModel.data.observe(this){
+            when(it){
+                is RegisterEvent.Success -> {
+                    binding.viewProgressBar.view.visibility = View.GONE
+                    binding.viewProgressBar.progressBar.visibility = View.GONE
+                    startActivity(Intent(this, LoginActivity::class.java))
+                }
+                is RegisterEvent.Loading -> {
+                    binding.viewProgressBar.progressBar.visibility = View.VISIBLE
+                    binding.viewProgressBar.view.visibility = View.VISIBLE
+                }
+                is RegisterEvent.Error -> {
+                    binding.viewProgressBar.view.visibility = View.GONE
+                    binding.viewProgressBar.progressBar.visibility = View.GONE
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 }

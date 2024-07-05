@@ -5,39 +5,33 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.appteam4.model.repository.RepositoryLogin
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ViewModelLogin(private val repositoryLogin: RepositoryLogin = RepositoryLogin()) :
+class LoginViewModel(private val repositoryLogin: RepositoryLogin = RepositoryLogin()) :
     ViewModel() {
 
-    private val _loginState = MutableLiveData<ResultState<String>>()
-    val loginState: LiveData<ResultState<String>> get() = _loginState
+    val data = MutableLiveData<LoginEvent>()
+    private val messageError = "Error en el servicio!!"
     private val _loginResult = MutableLiveData<Boolean>()
     val loginResult: LiveData<Boolean> get() = _loginResult
     private val _isLoginButtonEnabled = MutableLiveData<Boolean>()
     val isLoginButtonEnabled: LiveData<Boolean> get() = _isLoginButtonEnabled
 
     fun postLogin(email: String, password: String) {
-        viewModelScope.launch {
-            _loginState.value = ResultState.Loading
-            try {
-                val result = repositoryLogin.postLogin(email, password)
-                if (result.isSuccessful) {
-                    val responseBody = result.body()
-                    if (responseBody != null) {
-                        _loginState.postValue(ResultState.Success(responseBody.token))
-                    } else {
-                        _loginState.postValue(ResultState.Error("Cuerpo de la respuesta nulo"))
-                    }
-                } else {
-                    _loginState.postValue(ResultState.Error("Error en la respuesta"))
-                }
-            } catch (e: Exception) {
-                _loginState.postValue(ResultState.Error(e.message ?: "Error desconocido"))
+        CoroutineScope(Dispatchers.IO).launch {
+
+            data.postValue(LoginEvent.Loading)
+            val result = repositoryLogin.postLogin(email, password)
+
+            if (result.body() != null) {
+                data.postValue(LoginEvent.Success(result.body()!!))
+            } else {
+                data.postValue(LoginEvent.Error(messageError))
             }
         }
     }
-
     fun validateFields(email: String, password: String) {
         val emailValid = validateEmail(email)
         val passwordValid = validatePassword(password)
