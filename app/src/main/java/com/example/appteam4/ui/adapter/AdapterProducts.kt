@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appteam4.databinding.ItemRecyclerviewProductsBinding
+import com.example.appteam4.model.response.ResponseProducts
 
-class AdapterProducts : RecyclerView.Adapter<AdapterProducts.ViewHolder>() {
+class AdapterProducts(products: ResponseProducts) : RecyclerView.Adapter<AdapterProducts.ViewHolder>() {
 
-    inner class ViewHolder(private val binding: ItemRecyclerviewProductsBinding) :
+    inner class ViewHolder(private val binding: ItemRecyclerviewProductsBinding)
+        :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             binding.itemTitle.text

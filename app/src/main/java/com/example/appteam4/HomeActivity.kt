@@ -2,6 +2,7 @@ package com.example.appteam4
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -10,9 +11,11 @@ import com.example.appteam4.databinding.ActivityHomeBinding
 import com.example.appteam4.ui.adapter.Products
 import com.example.appteam4.ui.adapter.AdapterCategory
 import com.example.appteam4.ui.adapter.AdapterProducts
+import com.example.appteam4.ui.viewmodel.ProductsViewModel
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
+    private val viewModel by viewModels<ProductsViewModel>()
 
     private val adapterCategoryAdapter by lazy {
         AdapterCategory()
@@ -34,6 +37,16 @@ class HomeActivity : AppCompatActivity() {
         }
         showRecyclerViews()
         infoOffer()
+    }
+
+    private fun callProducts(){
+        viewModel.getProducts()
+    }
+
+    private fun observerProducts(){
+        viewModel.data.observe(this){
+            productsRecyclerView(it)
+        }
     }
 
     private fun showRecyclerViews() {
