@@ -3,17 +3,26 @@ package com.example.appteam4.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.appteam4.data.Product
+import com.example.appteam4.data.Products
 import com.example.appteam4.databinding.ItemRecyclerviewProductsBinding
-import com.example.appteam4.model.response.ResponseProducts
+import com.squareup.picasso.Picasso
 
-class AdapterProducts(products: ResponseProducts) : RecyclerView.Adapter<AdapterProducts.ViewHolder>() {
+class AdapterProducts() : RecyclerView.Adapter<AdapterProducts.ViewHolder>() {
 
+    private val listProducts = mutableListOf<Product>()
+
+    fun addItems(items: List<Product>) {
+        listProducts.addAll(items)
+        notifyDataSetChanged()
+    }
     inner class ViewHolder(private val binding: ItemRecyclerviewProductsBinding)
         :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
-            binding.itemTitle.text
-            binding.itemPrice.text
+        fun bind(item: Product) {
+            binding.itemTitle.text = item.name
+            binding.itemPrice.text = item.price
+            Picasso.get().load(item.image).into(binding.itemImage)
         }
     }
 
@@ -26,9 +35,9 @@ class AdapterProducts(products: ResponseProducts) : RecyclerView.Adapter<Adapter
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = 6
+    override fun getItemCount(): Int = listProducts.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind()
+        holder.bind(listProducts[position])
     }
 }

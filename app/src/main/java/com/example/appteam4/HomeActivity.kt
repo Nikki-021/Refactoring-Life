@@ -8,7 +8,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appteam4.databinding.ActivityHomeBinding
-import com.example.appteam4.ui.adapter.Products
 import com.example.appteam4.ui.adapter.AdapterCategory
 import com.example.appteam4.ui.adapter.AdapterProducts
 import com.example.appteam4.ui.viewmodel.ProductsViewModel
@@ -37,6 +36,8 @@ class HomeActivity : AppCompatActivity() {
         }
         showRecyclerViews()
         infoOffer()
+        callProducts()
+        observerProducts()
     }
 
     private fun callProducts(){
@@ -45,7 +46,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun observerProducts(){
         viewModel.data.observe(this){
-            productsRecyclerView(it)
+            System.out.println("products: $it")
         }
     }
 

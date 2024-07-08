@@ -5,8 +5,9 @@ data class Products (
     val size: Number,
     val totalPages: Number,
     val totalProducts: Number,
-    val products: Product
+    val products: List<Product>
 )
+
 data class Product (
     val idProduct: Number,
     val name: String,
@@ -17,6 +18,7 @@ data class Product (
     val isFavorite: Boolean,
     val description: String
 )
+
 data class ProductType(
     val idProductType: Number,
     val description: String,
