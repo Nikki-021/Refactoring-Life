@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appteam4.data.Product
-import com.example.appteam4.data.Products
 import com.example.appteam4.databinding.ItemRecyclerviewProductsBinding
 import com.squareup.picasso.Picasso
 
@@ -14,7 +13,6 @@ class AdapterProducts() : RecyclerView.Adapter<AdapterProducts.ViewHolder>() {
 
     fun addItems(items: List<Product>) {
         listProducts.addAll(items)
-        notifyDataSetChanged()
     }
     inner class ViewHolder(private val binding: ItemRecyclerviewProductsBinding)
         :

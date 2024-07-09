@@ -10,11 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appteam4.databinding.ActivityHomeBinding
 import com.example.appteam4.ui.adapter.AdapterCategory
 import com.example.appteam4.ui.adapter.AdapterProducts
+import com.example.appteam4.ui.viewmodel.DailyOfferViewModel
+import com.example.appteam4.ui.viewmodel.ProductTypesViewModel
 import com.example.appteam4.ui.viewmodel.ProductsViewModel
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
-    private val viewModel by viewModels<ProductsViewModel>()
+    private val viewModelProducts by viewModels<ProductsViewModel>()
+    private val viewModelProductTypes by viewModels<ProductTypesViewModel>()
+    private val viewModelDailyOffer by viewModels<DailyOfferViewModel>()
 
     private val adapterCategoryAdapter by lazy {
         AdapterCategory()
@@ -40,13 +44,32 @@ class HomeActivity : AppCompatActivity() {
         observerProducts()
     }
 
-    private fun callProducts(){
-        viewModel.getProducts()
+    private fun callProducts() {
+        viewModelProducts.getProducts()
+        viewModelProductTypes.getProductTypes()
+        viewModelDailyOffer.putProductDailyOffer(1)
     }
 
-    private fun observerProducts(){
-        viewModel.data.observe(this){
-            System.out.println("products: $it")
+    private fun observerProducts() {
+        viewModelProducts.data.observe(this) {
+            if(it == null){
+                System.out.println("products: $it")
+            }else{
+                adapterProductsAdapter.addItems(it.products.products)
+            }
+
+        }
+        viewModelProductTypes.data.observe(this) {
+            if(it == null){
+                System.out.println("productTypes: $it")
+            }else{
+                adapterCategoryAdapter.addItems(it.productTypes)
+            }
+        }
+        viewModelDailyOffer.data.observe(this){
+            binding.tvCategoyOffer.text = it.productDailyOffer.productType.description
+            binding.tvNameProductOffer.text = it.productDailyOffer.name
+            binding.tvPriceProductOffer.text = it.productDailyOffer.price
         }
     }
 
