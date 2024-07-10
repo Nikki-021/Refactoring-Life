@@ -47,29 +47,33 @@ class HomeActivity : AppCompatActivity() {
     private fun callProducts() {
         viewModelProducts.getProducts()
         viewModelProductTypes.getProductTypes()
-        viewModelDailyOffer.putProductDailyOffer(1)
+        viewModelDailyOffer.putProductDailyOffer()
     }
 
     private fun observerProducts() {
         viewModelProducts.data.observe(this) {
-            if(it == null){
+            if (it == null) {
                 System.out.println("products: $it")
-            }else{
+            } else {
                 adapterProductsAdapter.addItems(it.products.products)
             }
 
         }
         viewModelProductTypes.data.observe(this) {
-            if(it == null){
+            if (it == null) {
                 System.out.println("productTypes: $it")
-            }else{
+            } else {
                 adapterCategoryAdapter.addItems(it.productTypes)
             }
         }
-        viewModelDailyOffer.data.observe(this){
-            binding.tvCategoyOffer.text = it.productDailyOffer.productType.description
-            binding.tvNameProductOffer.text = it.productDailyOffer.name
-            binding.tvPriceProductOffer.text = it.productDailyOffer.price
+        viewModelDailyOffer.data.observe(this) {
+            if (it == null) {
+                System.out.println("productOffer: $it")
+            } else {
+                binding.tvCategoyOffer.text = it.productDailyOffer.productType.description
+                binding.tvNameProductOffer.text = it.productDailyOffer.name
+                binding.tvPriceProductOffer.text = it.productDailyOffer.price
+            }
         }
     }
 

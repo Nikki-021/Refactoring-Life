@@ -17,10 +17,10 @@ class DailyOfferViewModel(private val repositoryDailyOffer: RepositoryDailyOffer
 
     val data = MutableLiveData<ResponseDailyOffer>()
 
-    fun putProductDailyOffer(idProduct: Number) {
+    fun putProductDailyOffer(idProduct: Number = 1) {
         CoroutineScope(Dispatchers.IO).launch {
             val result = repositoryDailyOffer.putProductDailyOffer(idProduct)
-                data.postValue(result.body())
+            data.postValue(result.body())
         }
     }
 }
