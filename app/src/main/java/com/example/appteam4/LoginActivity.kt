@@ -50,7 +50,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun observerLogin() {
         viewModel.data.observe(this) {
-            println("login: $it")
             when (it) {
                 is LoginEvent.Success -> {
                     binding.viewProgressBar.view.visibility = View.GONE
