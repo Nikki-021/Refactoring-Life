@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ViewModelRegister(private val repositoryRegister: RepositoryRegister = RepositoryRegister()) : ViewModel() {
+class RegisterViewModel(private val repositoryRegister: RepositoryRegister = RepositoryRegister()) : ViewModel() {
 
 
 
@@ -31,11 +31,13 @@ class ViewModelRegister(private val repositoryRegister: RepositoryRegister = Rep
             }
         }
     }
-    fun validateFields(email: String, password: String){
+    fun validateFields(email: String, password: String, confirmPassword: String){
         val emailValid = validateEmail(email)
         val passwordValid = validatePassword(password)
+        val confirmPasswordValid = validatePassword(confirmPassword)
 
-        _isRegisterButtonEnable.value = emailValid && passwordValid
+        _isRegisterButtonEnable.value = emailValid && passwordValid && confirmPasswordValid && password == confirmPassword
+
     }
 
     private fun validateEmail(email: String): Boolean {

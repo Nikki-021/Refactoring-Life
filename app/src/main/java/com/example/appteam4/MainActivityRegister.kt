@@ -16,23 +16,25 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import com.example.appteam4.ui.viewmodel.RegisterEvent
-import com.example.appteam4.ui.viewmodel.ResultState
-import com.example.appteam4.ui.viewmodel.ViewModelRegister
+import com.example.appteam4.ui.viewmodel.RegisterViewModel
 
 class MainActivityRegister : AppCompatActivity() {
     private var isPasswordVisible = false
-    private val viewModel by viewModels<ViewModelRegister>()
     private lateinit var binding: ActivityMainRegisterBinding
+    private val viewModel by viewModels<RegisterViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityMainRegisterBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
+        binding = ActivityMainRegisterBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         setupTextObservers()
         setupObservers()
         navigation()
@@ -43,15 +45,20 @@ class MainActivityRegister : AppCompatActivity() {
 
     private fun callRegister() {
         binding.btnenter.setOnClickListener {
-            viewModel.postRegister(
-                binding.etEmailRegister.text.toString(),
-                binding.etPasswordRegister.text.toString()
-            )
+            val email = binding.etEmailRegister.text.toString()
+            val password = binding.etPasswordRegister.text.toString()
+            val confirmPassword = binding.etConfirmpasswordRegister.text.toString()
+
+            if (password == confirmPassword) {
+                viewModel.postRegister(email, password)
+            } else {
+                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
     private fun observerRegister() {
-        viewModel.data.observe(this){
+        viewModel.data.observe(this) {
             when (it) {
                 is RegisterEvent.Success -> {
                     binding.viewProgressBar.view.visibility = View.GONE
@@ -71,23 +78,34 @@ class MainActivityRegister : AppCompatActivity() {
         }
     }
 
-    private fun navigation(){
-        binding.tvLogin.setOnClickListener{
+    private fun navigation() {
+        binding.tvLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
     }
+
     private fun setupTextObservers() {
         binding.etEmailRegister.doAfterTextChanged { it: Editable? ->
             viewModel.validateFields(
                 it.toString().trim(),
-                binding.etPasswordRegister.text.toString().trim()
+                binding.etPasswordRegister.text.toString().trim(),
+                binding.etConfirmpasswordRegister.text.toString().trim()
             )
         }
 
         binding.etPasswordRegister.doAfterTextChanged { it: Editable? ->
             viewModel.validateFields(
                 binding.etEmailRegister.text.toString().trim(),
+                it.toString().trim(),
+                binding.etConfirmpasswordRegister.text.toString().trim()
+            )
+        }
+
+        binding.etConfirmpasswordRegister.doAfterTextChanged { it: Editable? ->
+            viewModel.validateFields(
+                binding.etEmailRegister.text.toString().trim(),
+                binding.etPasswordRegister.text.toString().trim(),
                 it.toString().trim()
             )
         }
@@ -107,12 +125,18 @@ class MainActivityRegister : AppCompatActivity() {
         }
 
         binding.btnenter.setOnClickListener {
-            viewModel.register(
-                binding.etEmailRegister.text.toString().trim(),
-                binding.etPasswordRegister.text.toString().trim()
-            )
+            val email = binding.etEmailRegister.text.toString().trim()
+            val password = binding.etPasswordRegister.text.toString().trim()
+            val confirmPassword = binding.etConfirmpasswordRegister.text.toString().trim()
+
+            if (password == confirmPassword) {
+                viewModel.register(email, password)
+            } else {
+                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+            }
         }
     }
+
     private fun updateRegisterButtonColor(isEnabled: Boolean) {
         if (isEnabled) {
             binding.btnenter.setBackgroundColor(
@@ -133,6 +157,7 @@ class MainActivityRegister : AppCompatActivity() {
 
     private fun passwordTransformation() {
         binding.etPasswordRegister.transformationMethod = PasswordTransformationMethod.getInstance()
+        binding.etConfirmpasswordRegister.transformationMethod = PasswordTransformationMethod.getInstance()
 
         binding.vwSquare.setOnClickListener {
             showPassword()
@@ -142,8 +167,10 @@ class MainActivityRegister : AppCompatActivity() {
     private fun showPassword() {
         if (isPasswordVisible) {
             binding.etPasswordRegister.transformationMethod = PasswordTransformationMethod.getInstance()
+            binding.etConfirmpasswordRegister.transformationMethod = PasswordTransformationMethod.getInstance()
         } else {
             binding.etPasswordRegister.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            binding.etConfirmpasswordRegister.transformationMethod = HideReturnsTransformationMethod.getInstance()
         }
         isPasswordVisible = !isPasswordVisible
     }
