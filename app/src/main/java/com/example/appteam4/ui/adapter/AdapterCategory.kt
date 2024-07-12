@@ -3,20 +3,18 @@ package com.example.appteam4.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.appteam4.data.Product
-import com.example.appteam4.data.ProductType
+import com.example.appteam4.data.ProductTypes
 import com.example.appteam4.databinding.ItemRecyclerviewCategoryBinding
 
 class AdapterCategory : RecyclerView.Adapter<AdapterCategory.ViewHolder>() {
 
-    private val listProductTypes = mutableListOf<ProductType>()
-
-    fun addItems(items: List<ProductType>) {
+    private val listProductTypes = mutableListOf<ProductTypes>()
+    fun addItems(items: List<ProductTypes>) {
         listProductTypes.addAll(items)
     }
     inner class ViewHolder(private val binding: ItemRecyclerviewCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ProductType) {
+        fun bind(item: ProductTypes) {
             binding.titleCategory.text = item.description
         }
     }

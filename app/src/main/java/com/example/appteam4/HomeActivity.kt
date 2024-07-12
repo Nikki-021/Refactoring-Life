@@ -17,7 +17,6 @@ import com.example.appteam4.ui.viewmodel.ProductsViewModel
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private val viewModelProducts by viewModels<ProductsViewModel>()
-    //private val viewModelProductTypes by viewModels<ProductTypesViewModel>()
     private val viewModelDailyOffer by viewModels<DailyOfferViewModel>()
     private lateinit var viewModelProductTypes: ProductTypesViewModel
 
@@ -61,7 +60,7 @@ class HomeActivity : AppCompatActivity() {
                 println("productTypes: $it")
             } else {
                 println("productTypesOkOKOK: $it")
-                //adapterCategoryAdapter.addItems(it.productTypes)
+                adapterCategoryAdapter.addItems(it.productTypes)
             }
         }
     }
