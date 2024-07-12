@@ -50,11 +50,12 @@ class LoginActivity : AppCompatActivity() {
 
     private fun observerLogin() {
         viewModel.data.observe(this) {
+            System.out.println("token: $it")
             when (it) {
                 is LoginEvent.Success -> {
                     binding.viewProgressBar.view.visibility = View.GONE
                     binding.viewProgressBar.progressBar.visibility = View.GONE
-                    startActivity(Intent(this, HomeActivity::class.java))
+                    startActivity(Intent(this, HomeActivity::class.java).putExtra("TOKEN",it.value.token))
                 }
 
                 is LoginEvent.Loading -> {

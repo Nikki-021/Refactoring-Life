@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class DataSourceProduct {
-    private val url = "https://api-users-c9xg.onrender.com"
+    private val url = "https://api-products-fe4p.onrender.com"
     private val retrofit = Retrofit.Builder().baseUrl(url).client(OkHttpClient())
         .addConverterFactory(GsonConverterFactory.create()).build()
     private val serviceData = retrofit.create(

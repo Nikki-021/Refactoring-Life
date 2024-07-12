@@ -17,8 +17,9 @@ import com.example.appteam4.ui.viewmodel.ProductsViewModel
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private val viewModelProducts by viewModels<ProductsViewModel>()
-    private val viewModelProductTypes by viewModels<ProductTypesViewModel>()
+    //private val viewModelProductTypes by viewModels<ProductTypesViewModel>()
     private val viewModelDailyOffer by viewModels<DailyOfferViewModel>()
+    private lateinit var viewModelProductTypes: ProductTypesViewModel
 
     private val adapterCategoryAdapter by lazy {
         AdapterCategory()
@@ -38,6 +39,10 @@ class HomeActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val token = intent.getStringExtra("TOKEN")
+        println("token, $token")
+        viewModelProductTypes = ProductTypesViewModel(token.toString())
+
         showRecyclerViews()
         infoOffer()
         callProducts()
@@ -45,34 +50,18 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun callProducts() {
-        viewModelProducts.getProducts()
+        //viewModelProducts.getProducts()
         viewModelProductTypes.getProductTypes()
-        viewModelDailyOffer.putProductDailyOffer()
+        //viewModelDailyOffer.putProductDailyOffer()
     }
 
     private fun observerProducts() {
-        viewModelProducts.data.observe(this) {
-            if (it == null) {
-                System.out.println("products: $it")
-            } else {
-                adapterProductsAdapter.addItems(it.products.products)
-            }
-
-        }
         viewModelProductTypes.data.observe(this) {
             if (it == null) {
-                System.out.println("productTypes: $it")
+                println("productTypes: $it")
             } else {
-                adapterCategoryAdapter.addItems(it.productTypes)
-            }
-        }
-        viewModelDailyOffer.data.observe(this) {
-            if (it == null) {
-                System.out.println("productOffer: $it")
-            } else {
-                binding.tvCategoyOffer.text = it.productDailyOffer.productType.description
-                binding.tvNameProductOffer.text = it.productDailyOffer.name
-                binding.tvPriceProductOffer.text = it.productDailyOffer.price
+                println("productTypesOkOKOK: $it")
+                //adapterCategoryAdapter.addItems(it.productTypes)
             }
         }
     }

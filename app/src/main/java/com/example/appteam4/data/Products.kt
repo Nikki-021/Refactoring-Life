@@ -20,7 +20,7 @@ data class Product (
 )
 
 data class ProductType (
-    val idProductType: Number,
+    val idProductType: Int,
     val description: String,
 )
 
