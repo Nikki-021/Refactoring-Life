@@ -53,10 +53,7 @@ class RegisterViewModel(private val repositoryRegister: RepositoryRegister = Rep
         return when {
             password.isEmpty() -> false
             password.length < 8 -> false
-            !password.matches(".*[A-Z].*".toRegex()) -> false
-            !password.matches(".*[a-z].*".toRegex()) -> false
-            !password.matches(".*[0-9].*".toRegex()) -> false
-            !password.matches(".*[@#\$%^&+=].*".toRegex()) -> false
+            !password.matches(".*[A-Za-z0-9@#\$%^&+=].*".toRegex()) -> false
             else -> true
         }
     }
