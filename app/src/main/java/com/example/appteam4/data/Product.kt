@@ -3,7 +3,7 @@ package com.example.appteam4.data
 data class Product (
     val idProduct: Int,
     val name: String,
-    val productType: ProductTypes,
+    val productType: ProductType,
     val currency: String,
     val price: Double,
     val image: String,
