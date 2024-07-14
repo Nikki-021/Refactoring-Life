@@ -8,9 +8,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ProductsViewModel(private val repositoryProducts: RepositoryProducts = RepositoryProducts()) :
-    ViewModel() {
+class ProductsViewModel(token: String) : ViewModel() {
 
+    private val repositoryProducts: RepositoryProducts = RepositoryProducts(token)
     val data = MutableLiveData<ResponseProducts>()
 
     fun getProducts() {

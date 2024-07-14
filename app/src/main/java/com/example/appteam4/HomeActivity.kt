@@ -1,6 +1,7 @@
 package com.example.appteam4
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -16,13 +17,11 @@ import com.example.appteam4.ui.viewmodel.ProductsViewModel
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
-    private val viewModelProducts by viewModels<ProductsViewModel>()
     private val viewModelDailyOffer by viewModels<DailyOfferViewModel>()
     private lateinit var viewModelProductTypes: ProductTypesViewModel
+    private lateinit var viewModelProducts: ProductsViewModel
 
-    private val adapterCategoryAdapter by lazy {
-        AdapterCategory()
-    }
+    private lateinit var adapterCategory: AdapterCategory
 
     private val adapterProductsAdapter by lazy {
         AdapterProducts()
@@ -41,16 +40,18 @@ class HomeActivity : AppCompatActivity() {
         val token = intent.getStringExtra("TOKEN")
         println("token, $token")
         viewModelProductTypes = ProductTypesViewModel(token.toString())
+        viewModelProducts = ProductsViewModel(token.toString())
 
         showRecyclerViews()
         infoOffer()
         callProducts()
         observerProducts()
+        actions()
     }
 
     private fun callProducts() {
-        //viewModelProducts.getProducts()
         viewModelProductTypes.getProductTypes()
+        viewModelProducts.getProducts()
         //viewModelDailyOffer.putProductDailyOffer()
     }
 
@@ -60,7 +61,15 @@ class HomeActivity : AppCompatActivity() {
                 println("productTypes: $it")
             } else {
                 println("productTypesOkOKOK: $it")
-                adapterCategoryAdapter.addItems(it.productTypes)
+                adapterCategory.updateData(it.productTypes)
+            }
+        }
+        viewModelProducts.data.observe(this) {
+            if (it == null) {
+                println("products: $it")
+            } else {
+                println("products OK: $it")
+                //adapterCategoryAdapter.addItems(it.products.products)
             }
         }
     }
@@ -71,10 +80,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun categoryRecyclerView() {
-        binding.recyclerViewCategory.apply {
-            adapter = adapterCategoryAdapter
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
+        adapterCategory = AdapterCategory(emptyList())
+        binding.recyclerViewCategory.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewCategory.adapter = adapterCategory
     }
 
     private fun productsRecyclerView() {
@@ -88,5 +96,11 @@ class HomeActivity : AppCompatActivity() {
         binding.tvCategoyOffer.text = "Rusty"
         binding.tvNameProductOffer.text = "Buzo canguro capucha con cordon"
         binding.tvPriceProductOffer.text = "$" + "52.00"
+    }
+
+    private fun actions(){
+        adapterCategory.onItemClick = { category ->
+            Toast.makeText(this, "$category presionado", Toast.LENGTH_SHORT).show()
+        }
     }
 }

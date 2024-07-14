@@ -1,12 +1,12 @@
 package com.example.appteam4.data
 
 data class Product (
-    val idProduct: Number,
+    val idProduct: Int,
     val name: String,
     val productType: ProductTypes,
     val currency: String,
-    val price: String,
+    val price: Double,
     val image: String,
-    val isFavorite: Boolean,
     val description: String,
+    val isFavorite: Boolean
 )

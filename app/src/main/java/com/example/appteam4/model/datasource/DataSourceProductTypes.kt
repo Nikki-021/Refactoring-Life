@@ -1,6 +1,5 @@
 package com.example.appteam4.model.datasource
 
-import android.util.Log
 import com.example.appteam4.model.Intercept.AuthInterceptor
 import com.example.appteam4.model.response.ResponseProductTypes
 import com.example.appteam4.model.service.ServiceProductTypes
@@ -26,8 +25,7 @@ class DataSourceProductTypes(token: String) {
     private val serviceData = retrofit.create(ServiceProductTypes::class.java)
 
     suspend fun getProductTypes(): Response<ResponseProductTypes> {
-        val response = serviceData.getProductTypes()
-        return response
+        return serviceData.getProductTypes()
     }
 }
 

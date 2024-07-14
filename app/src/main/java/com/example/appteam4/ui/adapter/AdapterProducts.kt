@@ -19,7 +19,7 @@ class AdapterProducts() : RecyclerView.Adapter<AdapterProducts.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Product) {
             binding.itemTitle.text = item.name
-            binding.itemPrice.text = item.price
+            binding.itemPrice.text = item.price.toString()
             Picasso.get().load(item.image).into(binding.itemImage)
         }
     }
