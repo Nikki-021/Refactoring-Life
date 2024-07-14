@@ -4,23 +4,24 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appteam4.data.Product
+import com.example.appteam4.data.Products
 import com.example.appteam4.databinding.ItemRecyclerviewProductsBinding
 import com.squareup.picasso.Picasso
 
-class AdapterProducts() : RecyclerView.Adapter<AdapterProducts.ViewHolder>() {
+class AdapterProducts(private var products: List<Product>) : RecyclerView.Adapter<AdapterProducts.ViewHolder>() {
 
-    private val listProducts = mutableListOf<Product>()
+    var onItemClick: ((String) -> Unit)? = null
 
-    fun addItems(items: List<Product>) {
-        listProducts.addAll(items)
-    }
     inner class ViewHolder(private val binding: ItemRecyclerviewProductsBinding)
         :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Product) {
             binding.itemTitle.text = item.name
-            binding.itemPrice.text = item.price.toString()
+            binding.itemPrice.text = "$ "+ item.price.toString()
             Picasso.get().load(item.image).into(binding.itemImage)
+            binding.cardViewProducts.setOnClickListener {
+                onItemClick?.invoke(item.name)
+            }
         }
     }
 
@@ -33,9 +34,13 @@ class AdapterProducts() : RecyclerView.Adapter<AdapterProducts.ViewHolder>() {
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = listProducts.size
+    override fun getItemCount(): Int = products.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listProducts[position])
+        holder.bind(products[position])
+    }
+    fun updateData(newProductTypes: List<Product>) {
+        products = newProductTypes
+        notifyDataSetChanged()
     }
 }

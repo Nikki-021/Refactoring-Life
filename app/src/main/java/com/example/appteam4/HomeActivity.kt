@@ -22,11 +22,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var viewModelProducts: ProductsViewModel
 
     private lateinit var adapterCategory: AdapterCategory
-
-    private val adapterProductsAdapter by lazy {
-        AdapterProducts()
-    }
-
+    private lateinit var adapterProducts: AdapterProducts
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -58,18 +54,16 @@ class HomeActivity : AppCompatActivity() {
     private fun observerProducts() {
         viewModelProductTypes.data.observe(this) {
             if (it == null) {
-                println("productTypes: $it")
+                Toast.makeText(this, "Respuesta del servidor: $it", Toast.LENGTH_SHORT).show()
             } else {
-                println("productTypesOkOKOK: $it")
                 adapterCategory.updateData(it.productTypes)
             }
         }
         viewModelProducts.data.observe(this) {
             if (it == null) {
-                println("products: $it")
+                Toast.makeText(this, "Respuesta del servidor: $it", Toast.LENGTH_SHORT).show()
             } else {
-                println("products OK: $it")
-                //adapterCategoryAdapter.addItems(it.products.products)
+                adapterProducts.updateData(it.products)
             }
         }
     }
@@ -86,10 +80,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun productsRecyclerView() {
-        binding.recyclerViewProducts.apply {
-            adapter = adapterProductsAdapter
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
+        adapterProducts = AdapterProducts(emptyList())
+        binding.recyclerViewProducts.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewProducts.adapter = adapterProducts
     }
 
     private fun infoOffer() {
@@ -101,6 +94,9 @@ class HomeActivity : AppCompatActivity() {
     private fun actions(){
         adapterCategory.onItemClick = { category ->
             Toast.makeText(this, "$category presionado", Toast.LENGTH_SHORT).show()
+        }
+        adapterProducts.onItemClick = { product ->
+            Toast.makeText(this, "$product presionado", Toast.LENGTH_SHORT).show()
         }
     }
 }
