@@ -3,7 +3,6 @@ package com.example.appteam4
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -17,9 +16,10 @@ import com.example.appteam4.ui.viewmodel.ProductsViewModel
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
-    private val viewModelDailyOffer by viewModels<DailyOfferViewModel>()
+
     private lateinit var viewModelProductTypes: ProductTypesViewModel
     private lateinit var viewModelProducts: ProductsViewModel
+    private lateinit var viewModelDailyOffer: DailyOfferViewModel
 
     private lateinit var adapterCategory: AdapterCategory
     private lateinit var adapterProducts: AdapterProducts
@@ -37,9 +37,9 @@ class HomeActivity : AppCompatActivity() {
         println("token, $token")
         viewModelProductTypes = ProductTypesViewModel(token.toString())
         viewModelProducts = ProductsViewModel(token.toString())
+        viewModelDailyOffer = DailyOfferViewModel(token.toString())
 
         showRecyclerViews()
-        infoOffer()
         callProducts()
         observerProducts()
         actions()
@@ -48,7 +48,7 @@ class HomeActivity : AppCompatActivity() {
     private fun callProducts() {
         viewModelProductTypes.getProductTypes()
         viewModelProducts.getProducts()
-        //viewModelDailyOffer.putProductDailyOffer()
+        viewModelDailyOffer.getProductDailyOffer()
     }
 
     private fun observerProducts() {
@@ -66,6 +66,15 @@ class HomeActivity : AppCompatActivity() {
                 adapterProducts.updateData(it.products)
             }
         }
+        viewModelDailyOffer.data.observe(this) {
+            if (it == null) {
+                Toast.makeText(this, "Respuesta del servidor: $it", Toast.LENGTH_SHORT).show()
+            } else {
+                binding.tvCategoyOffer.text = it.productType.descripcion
+                binding.tvNameProductOffer.text = it.name
+                binding.tvPriceProductOffer.text = it.currency + it.price
+            }
+        }
     }
 
     private fun showRecyclerViews() {
@@ -75,23 +84,19 @@ class HomeActivity : AppCompatActivity() {
 
     private fun categoryRecyclerView() {
         adapterCategory = AdapterCategory(emptyList())
-        binding.recyclerViewCategory.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewCategory.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerViewCategory.adapter = adapterCategory
     }
 
     private fun productsRecyclerView() {
         adapterProducts = AdapterProducts(emptyList())
-        binding.recyclerViewProducts.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewProducts.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerViewProducts.adapter = adapterProducts
     }
 
-    private fun infoOffer() {
-        binding.tvCategoyOffer.text = "Rusty"
-        binding.tvNameProductOffer.text = "Buzo canguro capucha con cordon"
-        binding.tvPriceProductOffer.text = "$" + "52.00"
-    }
-
-    private fun actions(){
+    private fun actions() {
         adapterCategory.onItemClick = { category ->
             Toast.makeText(this, "$category presionado", Toast.LENGTH_SHORT).show()
         }
