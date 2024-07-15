@@ -1,27 +1,29 @@
 package com.example.appteam4
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appteam4.databinding.ActivityHomeBinding
-import com.example.appteam4.ui.adapter.Products
 import com.example.appteam4.ui.adapter.AdapterCategory
 import com.example.appteam4.ui.adapter.AdapterProducts
+import com.example.appteam4.ui.viewmodel.DailyOfferViewModel
+import com.example.appteam4.ui.viewmodel.ProductTypesViewModel
+import com.example.appteam4.ui.viewmodel.ProductsViewModel
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
 
-    private val adapterCategoryAdapter by lazy {
-        AdapterCategory()
-    }
+    private lateinit var viewModelProductTypes: ProductTypesViewModel
+    private lateinit var viewModelProducts: ProductsViewModel
+    private lateinit var viewModelDailyOffer: DailyOfferViewModel
 
-    private val adapterProductsAdapter by lazy {
-        AdapterProducts()
-    }
-
+    private lateinit var adapterCategory: AdapterCategory
+    private lateinit var adapterProducts: AdapterProducts
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -32,8 +34,42 @@ class HomeActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val token = intent.getStringExtra("TOKEN")
+        viewModelProductTypes = ProductTypesViewModel(token.toString())
+        viewModelProducts = ProductsViewModel(token.toString())
+        viewModelDailyOffer = DailyOfferViewModel(token.toString())
+
         showRecyclerViews()
-        infoOffer()
+        callProducts()
+        observerProducts()
+        actions()
+    }
+
+    private fun callProducts() {
+        viewModelProductTypes.getProductTypes()
+        viewModelProducts.getProducts()
+        viewModelDailyOffer.getProductDailyOffer()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun observerProducts() {
+        viewModelProductTypes.data.observe(this) {
+            if (it != null) {
+                adapterCategory.updateData(it.productTypes)
+            }
+        }
+        viewModelProducts.data.observe(this) {
+            if (it != null) {
+                adapterProducts.updateData(it.products)
+            }
+        }
+        viewModelDailyOffer.data.observe(this) {
+            if (it != null) {
+                binding.tvCategoyOffer.text = it.productType.descripcion
+                binding.tvNameProductOffer.text = it.name
+                binding.tvPriceProductOffer.text = it.currency + it.price
+            }
+        }
     }
 
     private fun showRecyclerViews() {
@@ -42,22 +78,25 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun categoryRecyclerView() {
-        binding.recyclerViewCategory.apply {
-            adapter = adapterCategoryAdapter
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
+        adapterCategory = AdapterCategory(emptyList())
+        binding.recyclerViewCategory.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewCategory.adapter = adapterCategory
     }
 
     private fun productsRecyclerView() {
-        binding.recyclerViewProducts.apply {
-            adapter = adapterProductsAdapter
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
+        adapterProducts = AdapterProducts(emptyList())
+        binding.recyclerViewProducts.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewProducts.adapter = adapterProducts
     }
 
-    private fun infoOffer() {
-        binding.tvCategoyOffer.text = "Rusty"
-        binding.tvNameProductOffer.text = "Buzo canguro capucha con cordon"
-        binding.tvPriceProductOffer.text = "$" + "52.00"
+    private fun actions() {
+        adapterCategory.onItemClick = { category ->
+            Toast.makeText(this, "$category presionado", Toast.LENGTH_SHORT).show()
+        }
+        adapterProducts.onItemClick = { product ->
+            Toast.makeText(this, "$product presionado", Toast.LENGTH_SHORT).show()
+        }
     }
 }
