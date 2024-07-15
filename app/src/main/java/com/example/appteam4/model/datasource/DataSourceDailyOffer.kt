@@ -1,7 +1,6 @@
 package com.example.appteam4.model.datasource
 
 import com.example.appteam4.data.ProductDailyOffer
-import com.example.appteam4.data.Products
 import com.example.appteam4.model.Intercept.AuthInterceptor
 import com.example.appteam4.model.service.ServiceDailyOffer
 import okhttp3.OkHttpClient

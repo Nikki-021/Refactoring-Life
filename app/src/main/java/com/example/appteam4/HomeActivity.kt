@@ -1,5 +1,6 @@
 package com.example.appteam4
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -34,7 +35,6 @@ class HomeActivity : AppCompatActivity() {
             insets
         }
         val token = intent.getStringExtra("TOKEN")
-        println("token, $token")
         viewModelProductTypes = ProductTypesViewModel(token.toString())
         viewModelProducts = ProductsViewModel(token.toString())
         viewModelDailyOffer = DailyOfferViewModel(token.toString())
@@ -51,25 +51,20 @@ class HomeActivity : AppCompatActivity() {
         viewModelDailyOffer.getProductDailyOffer()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun observerProducts() {
         viewModelProductTypes.data.observe(this) {
-            if (it == null) {
-                Toast.makeText(this, "Respuesta del servidor: $it", Toast.LENGTH_SHORT).show()
-            } else {
+            if (it != null) {
                 adapterCategory.updateData(it.productTypes)
             }
         }
         viewModelProducts.data.observe(this) {
-            if (it == null) {
-                Toast.makeText(this, "Respuesta del servidor: $it", Toast.LENGTH_SHORT).show()
-            } else {
+            if (it != null) {
                 adapterProducts.updateData(it.products)
             }
         }
         viewModelDailyOffer.data.observe(this) {
-            if (it == null) {
-                Toast.makeText(this, "Respuesta del servidor: $it", Toast.LENGTH_SHORT).show()
-            } else {
+            if (it != null) {
                 binding.tvCategoyOffer.text = it.productType.descripcion
                 binding.tvNameProductOffer.text = it.name
                 binding.tvPriceProductOffer.text = it.currency + it.price
