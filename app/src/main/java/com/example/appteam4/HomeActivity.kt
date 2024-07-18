@@ -14,6 +14,7 @@ import com.example.appteam4.ui.adapter.AdapterProducts
 import com.example.appteam4.ui.viewmodel.DailyOfferViewModel
 import com.example.appteam4.ui.viewmodel.ProductTypesViewModel
 import com.example.appteam4.ui.viewmodel.ProductsViewModel
+import com.squareup.picasso.Picasso
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
@@ -93,6 +94,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun actions() {
         adapterCategory.onItemClick = { category ->
+            adapterProducts.filterByCategory(category)
             Toast.makeText(this, "$category presionado", Toast.LENGTH_SHORT).show()
         }
         adapterProducts.onItemClick = { product ->

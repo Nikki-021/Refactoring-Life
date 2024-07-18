@@ -8,7 +8,7 @@ import com.example.appteam4.data.Products
 import com.example.appteam4.databinding.ItemRecyclerviewProductsBinding
 import com.squareup.picasso.Picasso
 
-class AdapterProducts(private var products: List<Product>) :
+class AdapterProducts(private var products: List<Product>, private var filteredProducts: List<Product> = emptyList()) :
     RecyclerView.Adapter<AdapterProducts.ViewHolder>() {
 
     var onItemClick: ((String) -> Unit)? = null
@@ -22,6 +22,7 @@ class AdapterProducts(private var products: List<Product>) :
             binding.cardViewProducts.setOnClickListener {
                 onItemClick?.invoke(item.name)
             }
+
         }
     }
 
@@ -34,14 +35,24 @@ class AdapterProducts(private var products: List<Product>) :
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = products.size
+    override fun getItemCount(): Int = filteredProducts.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(products[position])
+        holder.bind(filteredProducts[position])
     }
 
     fun updateData(newProductTypes: List<Product>) {
         products = newProductTypes
+        filteredProducts = newProductTypes
+        notifyDataSetChanged()
+    }
+    fun filterByCategory(category: String) {
+        filteredProducts = if (category.isEmpty()) {
+            products
+        } else {
+            products.filter { it.productType.descripcion == category }
+        }
         notifyDataSetChanged()
     }
 }
+
