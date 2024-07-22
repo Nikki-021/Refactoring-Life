@@ -51,12 +51,13 @@ class MainActivityRegister : AppCompatActivity() {
     }
 
     private fun observerRegister() {
-        viewModel.data.observe(this){
-            when(it){
+        viewModel.data.observe(this) {
+            when (it) {
                 is RegisterEvent.Success -> {
                     binding.viewProgressBar.view.visibility = View.GONE
                     binding.viewProgressBar.progressBar.visibility = View.GONE
                     startActivity(Intent(this, HomeActivity::class.java))
+                    Toast.makeText(this, "Registro Exitoso", Toast.LENGTH_SHORT).show()
                 }
 
                 is RegisterEvent.Loading -> {
@@ -112,21 +113,6 @@ class MainActivityRegister : AppCompatActivity() {
             binding.btEnter.isEnabled = isEnabled
             updateRegisterButtonColor(isEnabled)
         }
-
-        viewModel.registerResult.observe(this) { success ->
-            if (success) {
-                Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Error en el registro", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        binding.btEnter.setOnClickListener {
-            viewModel.register(
-                binding.etEmailRegister.text.toString().trim(),
-                binding.etPasswordRegister.text.toString().trim()
-            )
-        }
     }
 
     private fun updateRegisterButtonColor(isEnabled: Boolean) {
@@ -158,7 +144,8 @@ class MainActivityRegister : AppCompatActivity() {
 
     private fun confirmPasswordTransformation() {
         // Tipo de entrada inicial para el campo de contraseña
-        binding.etConfirmpasswordRegister.transformationMethod = PasswordTransformationMethod.getInstance()
+        binding.etConfirmpasswordRegister.transformationMethod =
+            PasswordTransformationMethod.getInstance()
         // Agregar listener de clic al botón
         binding.vwSquare2.setOnClickListener {
             showPasswordConfirm()
@@ -168,10 +155,12 @@ class MainActivityRegister : AppCompatActivity() {
     private fun showPassword() {
         if (isPasswordVisible) {
             // Ocultar contraseña
-            binding.etPasswordRegister.transformationMethod = PasswordTransformationMethod.getInstance()
+            binding.etPasswordRegister.transformationMethod =
+                PasswordTransformationMethod.getInstance()
         } else {
             // Mostrar contraseña
-            binding.etPasswordRegister.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            binding.etPasswordRegister.transformationMethod =
+                HideReturnsTransformationMethod.getInstance()
         }
         isPasswordVisible = !isPasswordVisible // Estado de visibilidad
     }
@@ -179,10 +168,12 @@ class MainActivityRegister : AppCompatActivity() {
     private fun showPasswordConfirm() {
         if (isPasswordVisible) {
             // Ocultar contraseña
-            binding.etConfirmpasswordRegister.transformationMethod = PasswordTransformationMethod.getInstance()
+            binding.etConfirmpasswordRegister.transformationMethod =
+                PasswordTransformationMethod.getInstance()
         } else {
             // Mostrar contraseña
-            binding.etConfirmpasswordRegister.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            binding.etConfirmpasswordRegister.transformationMethod =
+                HideReturnsTransformationMethod.getInstance()
         }
         isPasswordVisible = !isPasswordVisible // Estado de visibilidad
     }

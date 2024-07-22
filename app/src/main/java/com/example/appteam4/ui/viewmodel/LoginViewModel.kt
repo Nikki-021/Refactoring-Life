@@ -22,10 +22,8 @@ class LoginViewModel(private val repositoryLogin: RepositoryLogin = RepositoryLo
 
     fun postLogin(email: String, password: String) {
         CoroutineScope(Dispatchers.IO).launch {
-
             data.postValue(LoginEvent.Loading)
             val result = repositoryLogin.postLogin(email, password)
-
             if (result.body() != null) {
                 data.postValue(LoginEvent.Success(result.body()!!))
             } else {
@@ -33,6 +31,7 @@ class LoginViewModel(private val repositoryLogin: RepositoryLogin = RepositoryLo
             }
         }
     }
+
     fun validateFields(email: String, password: String) {
         val emailValid = validateEmail(email)
         val passwordValid = validatePassword(password)
@@ -79,9 +78,5 @@ class LoginViewModel(private val repositoryLogin: RepositoryLogin = RepositoryLo
     private suspend fun simulateLogin(email: String, password: String): Boolean {
         kotlinx.coroutines.delay(2000)
         return registeredUsers[email] == password
-    }
-
-    fun setRegisteredUsers(users: Map<String, String>) {
-        registeredUsers = users
     }
 }

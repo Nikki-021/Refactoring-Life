@@ -9,7 +9,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RegisterViewModel(private val repositoryRegister: RepositoryRegister = RepositoryRegister()) : ViewModel() {
+class RegisterViewModel(private val repositoryRegister: RepositoryRegister = RepositoryRegister()) :
+    ViewModel() {
 
     val data = MutableLiveData<RegisterEvent>()
     private val messageError = "Error en el servicio"
@@ -18,7 +19,6 @@ class RegisterViewModel(private val repositoryRegister: RepositoryRegister = Rep
     private val _isRegisterButtonEnabled = MutableLiveData<Boolean>()
     val isRegisterButtonEnabled: LiveData<Boolean> get() = _isRegisterButtonEnabled
     private val registeredUsers = mutableMapOf<String, String>()
-
 
     fun postRegister(email: String, password: String) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -33,11 +33,15 @@ class RegisterViewModel(private val repositoryRegister: RepositoryRegister = Rep
         }
     }
 
-    fun validateFields(email: String, password: String, confirmPassword: String){
+    fun validateFields(email: String, password: String, confirmPassword: String) {
         val emailValid = validateEmail(email)
         val passwordValid = validatePassword(password)
         val passwordsMatch = password == confirmPassword
         _isRegisterButtonEnabled.value = emailValid && passwordValid && passwordsMatch
+    }
+
+    fun getRegisteredUsers(): Map<String, String> {
+        return registeredUsers
     }
 
     private fun validateEmail(email: String): Boolean {
@@ -55,7 +59,7 @@ class RegisterViewModel(private val repositoryRegister: RepositoryRegister = Rep
     }
 
     fun register(email: String, password: String) {
-        if (_isRegisterButtonEnabled.value == true ) {
+        if (_isRegisterButtonEnabled.value == true) {
             viewModelScope.launch {
                 val success = simulateregister(email, password)
                 if (success) {
@@ -72,10 +76,6 @@ class RegisterViewModel(private val repositoryRegister: RepositoryRegister = Rep
     private suspend fun simulateregister(email: String, password: String): Boolean {
         // Llamar a API de registro
         kotlinx.coroutines.delay(2000)
-        return true
-    }
-
-    fun getRegisteredUsers(): Map<String, String> {
-        return registeredUsers
+        return registeredUsers[email] == password
     }
 }

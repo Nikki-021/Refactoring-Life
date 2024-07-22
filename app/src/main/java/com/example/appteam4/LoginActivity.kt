@@ -105,21 +105,6 @@ class LoginActivity : AppCompatActivity() {
             binding.btnGetIn1.isEnabled = isEnabled
             updateLoginButtonColor(isEnabled)
         }
-
-        viewModel.loginResult.observe(this) { success ->
-            if (success) {
-                Toast.makeText(this, "Login exitoso", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Error en el login", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        binding.btnGetIn1.setOnClickListener {
-            viewModel.login(
-                binding.etEmail.text.toString().trim(),
-                binding.etPassword.text.toString().trim()
-            )
-        }
     }
 
     private fun updateLoginButtonColor(isEnabled: Boolean) {
