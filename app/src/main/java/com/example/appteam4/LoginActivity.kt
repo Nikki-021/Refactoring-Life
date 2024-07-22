@@ -19,7 +19,7 @@ import com.example.appteam4.ui.viewmodel.LoginEvent
 import com.example.appteam4.ui.viewmodel.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
-    
+
     private var isPasswordVisible = false
     private val viewModel by viewModels<LoginViewModel>()
 
@@ -55,7 +55,12 @@ class LoginActivity : AppCompatActivity() {
                 is LoginEvent.Success -> {
                     binding.viewProgressBar.view.visibility = View.GONE
                     binding.viewProgressBar.progressBar.visibility = View.GONE
-                    startActivity(Intent(this, HomeActivity::class.java))
+                    startActivity(
+                        Intent(this, HomeActivity::class.java).putExtra(
+                            "TOKEN",
+                            it.value.token
+                        )
+                    )
                 }
 
                 is LoginEvent.Loading -> {

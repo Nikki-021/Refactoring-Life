@@ -3,15 +3,26 @@ package com.example.appteam4.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.appteam4.data.Product
+import com.example.appteam4.data.Products
 import com.example.appteam4.databinding.ItemRecyclerviewProductsBinding
+import com.squareup.picasso.Picasso
 
-class AdapterProducts : RecyclerView.Adapter<AdapterProducts.ViewHolder>() {
+class AdapterProducts(private var products: List<Product>, private var filteredProducts: List<Product> = emptyList()) :
+    RecyclerView.Adapter<AdapterProducts.ViewHolder>() {
+
+    var onItemClick: ((String) -> Unit)? = null
 
     inner class ViewHolder(private val binding: ItemRecyclerviewProductsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
-            binding.itemTitle.text
-            binding.itemPrice.text
+        fun bind(item: Product) {
+            binding.itemTitle.text = item.name
+            binding.itemPrice.text = item.currency + item.price.toString()
+            Picasso.get().load(item.image).into(binding.itemImage)
+            binding.cardViewProducts.setOnClickListener {
+                onItemClick?.invoke(item.name)
+            }
+
         }
     }
 
@@ -24,9 +35,24 @@ class AdapterProducts : RecyclerView.Adapter<AdapterProducts.ViewHolder>() {
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = 6
+    override fun getItemCount(): Int = filteredProducts.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind()
+        holder.bind(filteredProducts[position])
+    }
+
+    fun updateData(newProductTypes: List<Product>) {
+        products = newProductTypes
+        filteredProducts = newProductTypes
+        notifyDataSetChanged()
+    }
+    fun filterByCategory(category: String) {
+        filteredProducts = if (category.isEmpty()) {
+            products
+        } else {
+            products.filter { it.productType.descripcion == category }
+        }
+        notifyDataSetChanged()
     }
 }
+
