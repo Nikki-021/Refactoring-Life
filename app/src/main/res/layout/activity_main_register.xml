@@ -7,6 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".MainActivityRegister">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"/>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_horizontal"
         android:layout_width="wrap_content"
@@ -40,6 +45,7 @@
         android:autofillHints=""
         android:background="@drawable/square_buttom"
         android:drawableStart="@drawable/account"
+        android:textColor="@color/black"
         android:hint="@string/email_register"
         android:inputType="textEmailAddress"
         android:padding="10dp"
@@ -63,6 +69,7 @@
         android:autofillHints=""
         android:background="@drawable/square_buttom"
         android:drawableStart="@drawable/padlock"
+        android:textColor="@color/black"
         android:hint="@string/password"
         android:inputType="textPassword"
         android:padding="10dp"
@@ -86,6 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
         android:layout_marginTop="54dp"
+        android:textColor="@color/black"
         android:text="@string/showPasword"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -107,6 +115,7 @@
         android:autofillHints=""
         android:background="@drawable/square_buttom"
         android:drawableStart="@drawable/padlock"
+        android:textColor="@color/black"
         android:hint="@string/password_confirm"
         android:inputType="textPassword"
         android:padding="10dp"
@@ -130,6 +139,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="54dp"
+        android:textColor="@color/black"
         android:text="@string/showPasword"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -166,6 +176,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
+        android:textColor="@color/black"
         android:text="@string/accountMessage"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -176,6 +187,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
+        android:textColor="@color/black"
         android:text="@string/loginMessage"
         android:textSize="14sp"
         android:textStyle="bold"
