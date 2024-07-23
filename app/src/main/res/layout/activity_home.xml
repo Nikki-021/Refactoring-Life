@@ -68,7 +68,7 @@
         android:textAlignment="center"
         android:textColor="@color/grey"
         android:textSize="11sp"
-        app:drawableStartCompat="@drawable/heart_blue"
+        app:drawableStartCompat="@drawable/icn_search"
         app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal1"
         app:layout_constraintEnd_toEndOf="@id/guideline_vertical2"
         app:layout_constraintStart_toStartOf="@id/guideline_vertical1"
