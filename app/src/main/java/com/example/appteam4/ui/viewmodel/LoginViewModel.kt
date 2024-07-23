@@ -18,13 +18,12 @@ class LoginViewModel(private val repositoryLogin: RepositoryLogin = RepositoryLo
     val loginResult: LiveData<Boolean> get() = _loginResult
     private val _isLoginButtonEnabled = MutableLiveData<Boolean>()
     val isLoginButtonEnabled: LiveData<Boolean> get() = _isLoginButtonEnabled
+    private var registeredUsers: Map<String, String> = emptyMap()
 
     fun postLogin(email: String, password: String) {
         CoroutineScope(Dispatchers.IO).launch {
-
             data.postValue(LoginEvent.Loading)
             val result = repositoryLogin.postLogin(email, password)
-
             if (result.body() != null) {
                 data.postValue(LoginEvent.Success(result.body()!!))
             } else {
@@ -32,6 +31,7 @@ class LoginViewModel(private val repositoryLogin: RepositoryLogin = RepositoryLo
             }
         }
     }
+
     fun validateFields(email: String, password: String) {
         val emailValid = validateEmail(email)
         val passwordValid = validatePassword(password)
@@ -76,7 +76,7 @@ class LoginViewModel(private val repositoryLogin: RepositoryLogin = RepositoryLo
     }
 
     private suspend fun simulateLogin(email: String, password: String): Boolean {
-        kotlinx.coroutines.delay(2000)  // Simular un retraso de red
-        return email == "usuario@dominio.com" && password == "Password123!"
+        kotlinx.coroutines.delay(2000)
+        return registeredUsers[email] == password
     }
 }

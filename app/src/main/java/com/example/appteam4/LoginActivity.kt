@@ -34,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         setupTextObservers()
         setupObservers()
         navigation()
@@ -103,21 +104,6 @@ class LoginActivity : AppCompatActivity() {
         viewModel.isLoginButtonEnabled.observe(this) { isEnabled ->
             binding.btnGetIn1.isEnabled = isEnabled
             updateLoginButtonColor(isEnabled)
-        }
-
-        viewModel.loginResult.observe(this) { success ->
-            if (success) {
-                Toast.makeText(this, "Login exitoso", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Error en el login", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        binding.btnGetIn1.setOnClickListener {
-            viewModel.login(
-                binding.etEmail.text.toString().trim(),
-                binding.etPassword.text.toString().trim()
-            )
         }
     }
 
