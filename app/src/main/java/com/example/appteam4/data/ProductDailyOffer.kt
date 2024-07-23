@@ -6,7 +6,7 @@ data class ProductDailyOffer(
     val productType: ProductType,
     val currency: String,
     val price: Double,
-    val image: List<ImageRes>,
+    val images: List<ImageRes>,
     val description: String,
     val isFavorite: Boolean = true,
     val dailyOffer: Boolean = true,

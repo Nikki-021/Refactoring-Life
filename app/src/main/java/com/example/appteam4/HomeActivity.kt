@@ -36,6 +36,7 @@ class HomeActivity : AppCompatActivity() {
             insets
         }
         val token = intent.getStringExtra("TOKEN")
+        println("token $token")
         viewModelProductTypes = ProductTypesViewModel(token.toString())
         viewModelProducts = ProductsViewModel(token.toString())
         viewModelDailyOffer = DailyOfferViewModel(token.toString())
@@ -69,6 +70,7 @@ class HomeActivity : AppCompatActivity() {
                 binding.tvCategoyOffer.text = it.productType.descripcion
                 binding.tvNameProductOffer.text = it.name
                 binding.tvPriceProductOffer.text = it.currency + it.price
+                Picasso.get().load(it.images[0].link).into(binding.imgProductOffer)
             }
         }
     }
@@ -95,10 +97,12 @@ class HomeActivity : AppCompatActivity() {
     private fun actions() {
         adapterCategory.onItemClick = { category ->
             adapterProducts.filterByCategory(category)
-            Toast.makeText(this, "$category presionado", Toast.LENGTH_SHORT).show()
         }
         adapterProducts.onItemClick = { product ->
             Toast.makeText(this, "$product presionado", Toast.LENGTH_SHORT).show()
+        }
+        binding.searchViewProducts.setOnClickListener {
+            Toast.makeText(this, "search ....", Toast.LENGTH_SHORT).show()
         }
     }
 }
