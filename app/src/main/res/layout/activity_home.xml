@@ -39,7 +39,8 @@
         app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal1"
         app:layout_constraintEnd_toEndOf="@id/guideline_vertical1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/icon_favorites"
@@ -50,22 +51,28 @@
         app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline_vertical2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
-    <androidx.appcompat.widget.SearchView
+    <TextView
         android:id="@+id/searchView_products"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginVertical="15dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
         android:background="@drawable/rounded_search_view"
-        android:theme="@style/SearchViewStyle"
-        app:iconifiedByDefault="false"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="40dp"
+        android:paddingBottom="3dp"
+        android:text="@string/hit_search_product"
+        android:textAlignment="center"
+        android:textColor="@color/grey"
+        android:textSize="11sp"
+        app:drawableStartCompat="@drawable/icn_search"
         app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal1"
         app:layout_constraintEnd_toEndOf="@id/guideline_vertical2"
         app:layout_constraintStart_toStartOf="@id/guideline_vertical1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:queryHint="@string/hit_search_product" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_category"
@@ -84,25 +91,37 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recyclerView_category"
         app:layout_constraintVertical_bias="0.0" />
 
+    <View
+        android:id="@+id/line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="25dp"
+        android:background="@color/grey_line"
+        app:layout_constraintBottom_toTopOf="@id/card_offer_day"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerView_products" />
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_offer_day"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="40dp"
         android:background="@android:color/transparent"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerView_products">
+        app:layout_constraintTop_toBottomOf="@id/line">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -125,7 +144,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/heart_blue"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/img_product_offer"
@@ -137,13 +157,15 @@
                 app:layout_constraintBottom_toTopOf="@id/tv_categoy_offer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_alert_offer" />
+                app:layout_constraintTop_toBottomOf="@id/tv_alert_offer"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/tv_categoy_offer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -179,7 +201,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_begin="62dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_vertical4"
