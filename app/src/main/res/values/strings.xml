@@ -23,4 +23,6 @@
     <string name="example_title_products">title</string>
     <string name="example_price_products">$ price</string>
     <string name="example_category">Category</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
