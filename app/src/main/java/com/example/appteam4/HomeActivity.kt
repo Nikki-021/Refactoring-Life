@@ -1,6 +1,7 @@
 package com.example.appteam4
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -13,6 +14,7 @@ import com.example.appteam4.ui.adapter.AdapterCategory
 import com.example.appteam4.ui.adapter.AdapterProducts
 import com.example.appteam4.ui.viewmodel.DailyOfferViewModel
 import com.example.appteam4.ui.viewmodel.ProductTypesViewModel
+import com.example.appteam4.ui.viewmodel.ProductsOnlyFavoriteViewModel
 import com.example.appteam4.ui.viewmodel.ProductsViewModel
 import com.squareup.picasso.Picasso
 
@@ -22,9 +24,13 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var viewModelProductTypes: ProductTypesViewModel
     private lateinit var viewModelProducts: ProductsViewModel
     private lateinit var viewModelDailyOffer: DailyOfferViewModel
+    private lateinit var viewModelProductsOnlyFavorite: ProductsOnlyFavoriteViewModel
 
     private lateinit var adapterCategory: AdapterCategory
     private lateinit var adapterProducts: AdapterProducts
+
+    private var token: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -35,7 +41,7 @@ class HomeActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val token = intent.getStringExtra("TOKEN")
+        token = intent.getStringExtra("TOKEN")
         println("token $token")
         viewModelProductTypes = ProductTypesViewModel(token.toString())
         viewModelProducts = ProductsViewModel(token.toString())
@@ -102,7 +108,7 @@ class HomeActivity : AppCompatActivity() {
             Toast.makeText(this, "$product presionado", Toast.LENGTH_SHORT).show()
         }
         binding.searchViewProducts.setOnClickListener {
-            Toast.makeText(this, "search ....", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, SearchActivity::class.java).putExtra("TOKEN",token))
         }
     }
 }
