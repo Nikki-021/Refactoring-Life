@@ -1,6 +1,7 @@
 package com.example.appteam4
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -45,6 +46,7 @@ class HomeActivity : AppCompatActivity() {
         callProducts()
         observerProducts()
         actions()
+        navigation()
     }
 
     private fun callProducts() {
@@ -103,6 +105,13 @@ class HomeActivity : AppCompatActivity() {
         }
         binding.searchViewProducts.setOnClickListener {
             Toast.makeText(this, "search ....", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun navigation() {
+        binding.imgProductOffer.setOnClickListener {
+            val intent = Intent(this, ActivityDescriptionHome::class.java)
+            startActivity(intent)
         }
     }
 }

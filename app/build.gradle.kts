@@ -45,6 +45,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.navigation.fragment)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -62,4 +63,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.7.2")
     //recyclerview
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+    //Navigation component
+    implementation("androidx.navigation:navigation-fragment-ktk:2.4.2")
+    implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
 }
