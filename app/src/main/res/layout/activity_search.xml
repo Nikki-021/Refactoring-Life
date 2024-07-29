@@ -63,6 +63,7 @@
         android:layout_marginHorizontal="20dp"
         android:background="@drawable/rounded_search_view"
         android:searchIcon="@drawable/heart_blue"
+        android:theme="@style/SearchViewStyle"
         app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal1"
         app:layout_constraintEnd_toEndOf="@id/guideline_vertical2"
         app:layout_constraintStart_toStartOf="@id/guideline_vertical1"
@@ -71,8 +72,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_products_search"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

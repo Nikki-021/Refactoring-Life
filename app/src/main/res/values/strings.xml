@@ -23,4 +23,5 @@
     <string name="example_title_products">title</string>
     <string name="example_price_products">$ price</string>
     <string name="example_category">Category</string>
+    <string name="watch_product">Ver</string>
 </resources>

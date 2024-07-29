@@ -9,6 +9,7 @@
 
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
         <item name="android:textSize">9sp</item>
+        <item name="color"> @color/black</item>
     </style>
 
 </resources>

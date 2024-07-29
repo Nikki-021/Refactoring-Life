@@ -24,7 +24,6 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var viewModelProductTypes: ProductTypesViewModel
     private lateinit var viewModelProducts: ProductsViewModel
     private lateinit var viewModelDailyOffer: DailyOfferViewModel
-    private lateinit var viewModelProductsOnlyFavorite: ProductsOnlyFavoriteViewModel
 
     private lateinit var adapterCategory: AdapterCategory
     private lateinit var adapterProducts: AdapterProducts
@@ -42,7 +41,6 @@ class HomeActivity : AppCompatActivity() {
             insets
         }
         token = intent.getStringExtra("TOKEN")
-        println("token $token")
         viewModelProductTypes = ProductTypesViewModel(token.toString())
         viewModelProducts = ProductsViewModel(token.toString())
         viewModelDailyOffer = DailyOfferViewModel(token.toString())

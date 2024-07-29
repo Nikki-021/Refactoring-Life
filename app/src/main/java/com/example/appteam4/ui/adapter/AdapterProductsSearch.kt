@@ -43,8 +43,9 @@ class AdapterProductsSearch(private var products: List<Product>) :
 
     override fun getItemCount(): Int = filterProductList.size
 
-    fun updateData(newProductTypes: List<Product>) {
-        products = newProductTypes
+    fun updateData(newProducts: List<Product>) {
+        products = newProducts
+        filterProductList = newProducts
         notifyDataSetChanged()
     }
 

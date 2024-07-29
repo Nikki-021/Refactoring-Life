@@ -20,7 +20,6 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
 
     private lateinit var viewModelProducts: ProductsViewModel
-    //private val viewModelProducts by viewModels<ProductsViewModel>()
     private lateinit var viewModelProductsOnlyFavorite: ProductsOnlyFavoriteViewModel
     private lateinit var adapterProductsSearch: AdapterProductsSearch
 
@@ -35,8 +34,9 @@ class SearchActivity : AppCompatActivity() {
             insets
         }
         val token = intent.getStringExtra("TOKEN")
-        println("token $token")
+        println("token search $token")
         viewModelProducts = ProductsViewModel(token.toString())
+        viewModelProductsOnlyFavorite = ProductsOnlyFavoriteViewModel(token.toString())
 
         callProducts()
         observerProducts()
@@ -45,7 +45,7 @@ class SearchActivity : AppCompatActivity() {
     }
     private fun callProducts() {
         viewModelProducts.getProducts()
-        //viewModelProductsOnlyFavorite.getOnlyFavorite()
+        viewModelProductsOnlyFavorite.getOnlyFavorite()
     }
     private fun observerProducts() {
         viewModelProducts.data.observe(this) {
@@ -53,11 +53,13 @@ class SearchActivity : AppCompatActivity() {
                 adapterProductsSearch.updateData(it.products)
             }
         }
-        /*viewModelProductsOnlyFavorite.data.observe(this) {
+        viewModelProductsOnlyFavorite.data.observe(this) {
             if (it != null) {
                 println("favorite $it")
+            }else{
+                println("sin favoritos")
             }
-        }*/
+        }
     }
     private fun productsRecyclerView() {
         adapterProductsSearch = AdapterProductsSearch(emptyList())
