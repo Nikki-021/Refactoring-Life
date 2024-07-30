@@ -24,15 +24,5 @@
         android:id="@+id/imagesFragment"
         android:name="com.example.appteam4.navigation.ImagesFragment"
         android:label="fragment_images"
-        tools:layout="@layout/fragment_images" >
-        <action
-            android:id="@+id/action_imagesFragment_to_descriptionFragment"
-            app:destination="@id/descriptionFragment" />
-        <action
-            android:id="@+id/action_imagesFragment_to_financingFragment"
-            app:destination="@id/financingFragment" />
-        <action
-            android:id="@+id/action_imagesFragment_to_commentsFragment"
-            app:destination="@id/commentsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_images" />
 </navigation>

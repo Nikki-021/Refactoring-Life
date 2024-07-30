@@ -5,20 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.appteam4.R
+import com.example.appteam4.databinding.FragmentImagesBinding
 
 class ImagesFragment : Fragment() {
 
+    private var _binding: FragmentImagesBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_images, container, false)
+        _binding = FragmentImagesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        fun newInstance(): ImagesFragment {
-            return ImagesFragment()
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

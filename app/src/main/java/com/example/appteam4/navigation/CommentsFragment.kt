@@ -5,19 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.appteam4.R
+import com.example.appteam4.databinding.FragmentCommentsBinding
 
 class CommentsFragment : Fragment() {
-  override fun onCreateView(
+    private var _binding: FragmentCommentsBinding? = null
+    private val binding get() = _binding!!
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-      return inflater.inflate(R.layout.fragment_images, container, false)
-  }
+        _binding = FragmentCommentsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-    companion object {
-        fun newInstance(): CommentsFragment {
-            return CommentsFragment()
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -13,43 +13,30 @@ class ActivityDescriptionHome : AppCompatActivity() {
 
     private lateinit var binding: ActivityDescriptionHomeBinding
 
-    private val fragment1: ImagesFragment by lazy {
-        ImagesFragment.newInstance()
-    }
-    private val fragment2: DescriptionFragment by lazy {
-        DescriptionFragment.newInstance()
-    }
-    private val fragment3: FinancingFragment by lazy {
-        FinancingFragment.newInstance()
-    }
-    private val fragment4: CommentsFragment by lazy {
-        CommentsFragment.newInstance()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDescriptionHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.tvImafesFragment.setOnClickListener {
-          showFragment(fragment1, ImagesFragment::class.java.toString())
+          loadFragment(ImagesFragment())
         }
 
         binding.tvDescriptionFragment.setOnClickListener {
-            showFragment(fragment2, DescriptionFragment::class.java.toString())
+            loadFragment(DescriptionFragment())
         }
 
         binding.tvFinancingFragment.setOnClickListener {
-            showFragment(fragment3, FinancingFragment::class.java.toString())
+            loadFragment(FinancingFragment())
         }
 
         binding.tvCommentsFragment.setOnClickListener {
-            showFragment(fragment4, CommentsFragment::class.java.toString())
+            loadFragment(CommentsFragment())
         }
     }
 
-    private fun showFragment(fragment: Fragment, tag: String) {
+    private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .add(binding.fragmentContainer.id, fragment, tag).commit()
+            .replace(R.id.fragment_container, fragment).commit()
     }
 }

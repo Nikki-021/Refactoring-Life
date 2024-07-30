@@ -9,71 +9,65 @@
     tools:context=".ActivityDescriptionHome">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:orientation="horizontal"
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
         android:background="@color/light_purple"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/tv_imafes_fragment"
-            android:layout_width="0dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textSize="16sp"
+            android:gravity="center_vertical"
+            android:rotation="-90"
+            android:text="Imagenes"
             android:textColor="@color/white"
-            android:text="Imagenes" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_description_fragment"
-            android:layout_width="0dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textSize="16sp"
+            android:gravity="center_vertical"
+            android:rotation="-90"
+            android:text="Descripción"
             android:textColor="@color/white"
-            android:text="Descripción" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_financing_fragment"
-            android:layout_width="0dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textSize="16sp"
+            android:gravity="center_vertical"
+            android:rotation="-90"
+            android:text="Financiación"
             android:textColor="@color/white"
-            android:text="Financiación" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_comments_fragment"
-            android:layout_width="0dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textSize="16sp"
+            android:gravity="center_vertical"
+            android:rotation="-90"
+            android:text="Comentarios"
             android:textColor="@color/white"
-            android:text="Comentarios" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 
     <FrameLayout
         android:id="@+id/fragment_container"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="340dp"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

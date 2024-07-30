@@ -5,20 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.appteam4.R
+import com.example.appteam4.databinding.FragmentFinancingBinding
 
 class FinancingFragment : Fragment() {
 
+    private var _binding: FragmentFinancingBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_images, container, false)
+        _binding = FragmentFinancingBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        fun newInstance(): FinancingFragment {
-            return FinancingFragment()
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
