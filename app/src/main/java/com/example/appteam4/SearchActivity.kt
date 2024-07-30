@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appteam4.databinding.ActivitySearchBinding
 import com.example.appteam4.ui.adapter.AdapterProductsSearch
 import com.example.appteam4.ui.viewmodel.LoginViewModel
+import com.example.appteam4.ui.viewmodel.ProductFavoriteViewModel
 import com.example.appteam4.ui.viewmodel.ProductTypesViewModel
 import com.example.appteam4.ui.viewmodel.ProductsOnlyFavoriteViewModel
 import com.example.appteam4.ui.viewmodel.ProductsViewModel
@@ -21,7 +22,11 @@ class SearchActivity : AppCompatActivity() {
 
     private lateinit var viewModelProducts: ProductsViewModel
     private lateinit var viewModelProductsOnlyFavorite: ProductsOnlyFavoriteViewModel
+    private lateinit var viewModelProductFavorite: ProductFavoriteViewModel
+
     private lateinit var adapterProductsSearch: AdapterProductsSearch
+
+    private var showingFavorites = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +42,7 @@ class SearchActivity : AppCompatActivity() {
         println("token search $token")
         viewModelProducts = ProductsViewModel(token.toString())
         viewModelProductsOnlyFavorite = ProductsOnlyFavoriteViewModel(token.toString())
+        viewModelProductFavorite = ProductFavoriteViewModel(token.toString())
 
         callProducts()
         observerProducts()
@@ -46,19 +52,22 @@ class SearchActivity : AppCompatActivity() {
     private fun callProducts() {
         viewModelProducts.getProducts()
         viewModelProductsOnlyFavorite.getOnlyFavorite()
+        //viewModelProductFavorite.updateProductFavorite(1)
     }
     private fun observerProducts() {
         viewModelProducts.data.observe(this) {
-            if (it != null) {
+            if (it != null  && !showingFavorites) {
                 adapterProductsSearch.updateData(it.products)
             }
         }
         viewModelProductsOnlyFavorite.data.observe(this) {
-            if (it != null) {
+            if (it != null && showingFavorites) {
+                adapterProductsSearch.updateData(it.products)
                 println("favorite $it")
-            }else{
-                println("sin favoritos")
-            }
+            } else if (showingFavorites) {
+            adapterProductsSearch.updateData(emptyList())
+            println("sin favoritos")
+        }
         }
     }
     private fun productsRecyclerView() {
@@ -69,7 +78,12 @@ class SearchActivity : AppCompatActivity() {
     }
     private fun actions() {
         binding.iconFavorites.setOnClickListener {
-            Toast.makeText(this, "is Favorite", Toast.LENGTH_SHORT).show()
+            showingFavorites = !showingFavorites
+            if (showingFavorites) {
+                viewModelProductsOnlyFavorite.getOnlyFavorite()
+            } else {
+                viewModelProducts.getProducts()
+            }
         }
         binding.searchViewProducts.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
