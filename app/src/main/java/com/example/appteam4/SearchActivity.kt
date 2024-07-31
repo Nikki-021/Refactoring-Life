@@ -2,18 +2,14 @@ package com.example.appteam4
 
 import android.os.Bundle
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appteam4.databinding.ActivitySearchBinding
 import com.example.appteam4.ui.adapter.AdapterProductsSearch
-import com.example.appteam4.ui.viewmodel.LoginViewModel
 import com.example.appteam4.ui.viewmodel.ProductFavoriteViewModel
-import com.example.appteam4.ui.viewmodel.ProductTypesViewModel
 import com.example.appteam4.ui.viewmodel.ProductsOnlyFavoriteViewModel
 import com.example.appteam4.ui.viewmodel.ProductsViewModel
 
@@ -63,10 +59,8 @@ class SearchActivity : AppCompatActivity() {
         viewModelProductsOnlyFavorite.data.observe(this) {
             if (it != null && showingFavorites) {
                 adapterProductsSearch.updateData(it.products)
-                println("favorite $it")
             } else if (showingFavorites) {
             adapterProductsSearch.updateData(emptyList())
-            println("sin favoritos")
         }
         }
     }
@@ -81,8 +75,10 @@ class SearchActivity : AppCompatActivity() {
             showingFavorites = !showingFavorites
             if (showingFavorites) {
                 viewModelProductsOnlyFavorite.getOnlyFavorite()
+                binding.iconFavorites.setImageResource(R.drawable.heart_actived)
             } else {
                 viewModelProducts.getProducts()
+                binding.iconFavorites.setImageResource(R.drawable.heart)
             }
         }
         binding.searchViewProducts.setOnQueryTextListener(object: SearchView.OnQueryTextListener{

@@ -3,6 +3,7 @@ package com.example.appteam4.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.appteam4.R
 import com.example.appteam4.data.Product
 import com.example.appteam4.databinding.ItemRecyclerviewProductsSearchBinding
 import com.squareup.picasso.Picasso
@@ -18,9 +19,13 @@ class AdapterProductsSearch(private var products: List<Product>) :
             binding.tvPrice.text = item.currency + item.price.toString()
             Picasso.get().load(item.image).into(binding.img)
             binding.btnFavorites.setOnClickListener {
+                item.isFavorite = !item.isFavorite
                 if (item.isFavorite) {
-                    !item.isFavorite
+                    binding.btnFavorites.setImageResource(R.drawable.heart_blue_actived)
+                } else {
+                    binding.btnFavorites.setImageResource(R.drawable.heart_blue)
                 }
+                notifyItemChanged(adapterPosition)
             }
         }
     }
