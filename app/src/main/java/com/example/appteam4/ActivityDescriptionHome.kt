@@ -12,7 +12,6 @@ import com.example.appteam4.navigation.ImagesFragment
 class ActivityDescriptionHome : AppCompatActivity() {
 
     private lateinit var binding: ActivityDescriptionHomeBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDescriptionHomeBinding.inflate(layoutInflater)
