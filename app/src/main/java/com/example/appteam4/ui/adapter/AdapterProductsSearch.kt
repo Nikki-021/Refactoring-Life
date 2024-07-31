@@ -6,11 +6,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.appteam4.R
 import com.example.appteam4.data.Product
 import com.example.appteam4.databinding.ItemRecyclerviewProductsSearchBinding
+import com.example.appteam4.ui.viewmodel.ProductFavoriteViewModel
 import com.squareup.picasso.Picasso
 
-class AdapterProductsSearch(private var products: List<Product>) :
+class AdapterProductsSearch(
+    var products: List<Product>,
+    private val viewModelProductFavorite: ProductFavoriteViewModel,
+    private val removeFromFavorites: (Product) -> Unit
+) :
     RecyclerView.Adapter<AdapterProductsSearch.ViewHolder>() {
-        private var filterProductList : List<Product> = products
+    private var filterProductList: List<Product> = products
+
     inner class ViewHolder(private val binding: ItemRecyclerviewProductsSearchBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Product) {
@@ -18,12 +24,19 @@ class AdapterProductsSearch(private var products: List<Product>) :
             binding.tvDescription.text = item.description
             binding.tvPrice.text = item.currency + item.price.toString()
             Picasso.get().load(item.image).into(binding.img)
+
+            val favoriteImageRes = if (item.isFavorite) {
+                R.drawable.heart_blue_actived
+            } else {
+                R.drawable.heart_blue
+            }
+            binding.btnFavorites.setImageResource(favoriteImageRes)
+
             binding.btnFavorites.setOnClickListener {
                 item.isFavorite = !item.isFavorite
-                if (item.isFavorite) {
-                    binding.btnFavorites.setImageResource(R.drawable.heart_blue_actived)
-                } else {
-                    binding.btnFavorites.setImageResource(R.drawable.heart_blue)
+                viewModelProductFavorite.updateProductFavorite(item.idProduct)
+                if (!item.isFavorite) {
+                    removeFromFavorites(item)
                 }
                 notifyItemChanged(adapterPosition)
             }

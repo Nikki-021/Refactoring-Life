@@ -35,7 +35,6 @@ class SearchActivity : AppCompatActivity() {
             insets
         }
         val token = intent.getStringExtra("TOKEN")
-        println("token search $token")
         viewModelProducts = ProductsViewModel(token.toString())
         viewModelProductsOnlyFavorite = ProductsOnlyFavoriteViewModel(token.toString())
         viewModelProductFavorite = ProductFavoriteViewModel(token.toString())
@@ -45,14 +44,15 @@ class SearchActivity : AppCompatActivity() {
         productsRecyclerView()
         actions()
     }
+
     private fun callProducts() {
         viewModelProducts.getProducts()
         viewModelProductsOnlyFavorite.getOnlyFavorite()
-        //viewModelProductFavorite.updateProductFavorite(1)
     }
+
     private fun observerProducts() {
         viewModelProducts.data.observe(this) {
-            if (it != null  && !showingFavorites) {
+            if (it != null && !showingFavorites) {
                 adapterProductsSearch.updateData(it.products)
             }
         }
@@ -60,16 +60,25 @@ class SearchActivity : AppCompatActivity() {
             if (it != null && showingFavorites) {
                 adapterProductsSearch.updateData(it.products)
             } else if (showingFavorites) {
-            adapterProductsSearch.updateData(emptyList())
+                adapterProductsSearch.updateData(emptyList())
+            }
         }
-        }
+
     }
+
     private fun productsRecyclerView() {
-        adapterProductsSearch = AdapterProductsSearch(emptyList())
+        adapterProductsSearch =
+            AdapterProductsSearch(emptyList(), viewModelProductFavorite) { product ->
+                val updatedList = adapterProductsSearch.products.toMutableList().apply {
+                    remove(product)
+                }
+                adapterProductsSearch.updateData(updatedList)
+            }
         binding.recyclerViewProductsSearch.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerViewProductsSearch.adapter = adapterProductsSearch
     }
+
     private fun actions() {
         binding.iconFavorites.setOnClickListener {
             showingFavorites = !showingFavorites
@@ -81,7 +90,7 @@ class SearchActivity : AppCompatActivity() {
                 binding.iconFavorites.setImageResource(R.drawable.heart)
             }
         }
-        binding.searchViewProducts.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        binding.searchViewProducts.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
