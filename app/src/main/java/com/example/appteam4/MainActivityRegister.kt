@@ -56,7 +56,10 @@ class MainActivityRegister : AppCompatActivity() {
                 is RegisterEvent.Success -> {
                     binding.viewProgressBar.view.visibility = View.GONE
                     binding.viewProgressBar.progressBar.visibility = View.GONE
-                    startActivity(Intent(this, HomeActivity::class.java))
+                    startActivity(Intent(this, HomeActivity::class.java).putExtra(
+                        "TOKEN",
+                        it.value.token
+                    ))
                     Toast.makeText(this, "Registro Exitoso", Toast.LENGTH_SHORT).show()
                 }
 
