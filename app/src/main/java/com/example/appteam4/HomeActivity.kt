@@ -49,6 +49,7 @@ class HomeActivity : AppCompatActivity() {
         callProducts()
         observerProducts()
         actions()
+        navigation()
     }
 
     private fun callProducts() {
@@ -107,6 +108,13 @@ class HomeActivity : AppCompatActivity() {
         }
         binding.searchViewProducts.setOnClickListener {
             startActivity(Intent(this, SearchActivity::class.java).putExtra("TOKEN",token))
+        }
+    }
+
+    private fun navigation() {
+        binding.imgProductOffer.setOnClickListener {
+            val intent = Intent(this, ActivityDescriptionHome::class.java)
+            startActivity(intent)
         }
     }
 }

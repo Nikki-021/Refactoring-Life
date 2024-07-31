@@ -18,10 +18,10 @@
     <string name="text_offer_day">Oferta del dia</string>
     <string name="log_in">Iniciar sesion</string>
     <string name="email">Email</string>
+    <string name="watch_product">Ver</string>
     <string name="account">Si no tienes una cuenta ,   </string>
     <string name="register_here">registrate aqui</string>
     <string name="example_title_products">title</string>
     <string name="example_price_products">$ price</string>
     <string name="example_category">Category</string>
-    <string name="watch_product">Ver</string>
 </resources>
